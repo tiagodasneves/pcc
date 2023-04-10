@@ -2,22 +2,11 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 
-
-class Endereco(models.Model):
-    rua = models.CharField(max_length=255)
-    bairro = models.CharField(max_length=255)
-    cidade = models.CharField(max_length=255)
-    estado = models.CharField(max_length=2)
-
-    def __str__(self):
-        return f'{self.rua}, {self.bairro}, {self.cidade} - {self.estado}'
-
 class Pessoa(AbstractBaseUser):
     # Campos personalizados da classe Pessoa
     nome = models.CharField(max_length=100)
     cpf = models.CharField(max_length=11)
     telefone = models.CharField(max_length=20)
-    enderecos = models.ManyToManyField(Endereco)
 
     # Campos padrão da classe User
     username = models.CharField(max_length=30, unique=True)
@@ -28,22 +17,28 @@ class Pessoa(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
+    rua = models.CharField(max_length=255, null=True)
+    bairro = models.CharField(max_length=255, null=True)
+    cidade = models.CharField(max_length=255, null=True)
+    estado = models.CharField(max_length=2, null=True)
+    escolhaRegiao = [
+        ('NO', 'Norte'),
+        ('NE', 'Nordeste'),
+        ('SE', 'Sudeste'),
+        ('CO', 'Centro-Oeste'),
+        ('SU', 'Sul'),
+    ]
+    regiao = models.CharField(max_length=2, choices=escolhaRegiao, default='NO')
+
     def __str__(self):
         return self.nome
-
-    def add_endereco(self, endereco):
-        self.enderecos.add(endereco)
-
-    def remove_endereco(self, endereco):
-        self.enderecos.remove(endereco)
 
 
 class Instituicao(AbstractBaseUser):
-    # Campos personalizados da classe Pessoa
+    # Campos personalizados da classe Instituição
     nome = models.CharField(max_length=100)
     cnpj = models.CharField(max_length=14)
     telefone = models.CharField(max_length=20)
-    enderecos = models.ManyToManyField(Endereco)
 
     # Campos padrão da classe User
     username = models.CharField(max_length=30, unique=True)
@@ -54,11 +49,24 @@ class Instituicao(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
+    # Endereço
+    rua = models.CharField(max_length=255, null=True)
+    bairro = models.CharField(max_length=255, null=True)
+    cidade = models.CharField(max_length=255, null=True)
+    estado = models.CharField(max_length=2, null=True)
+    escolhaRegiao = [
+        ('NO', 'Norte'),
+        ('NE', 'Nordeste'),
+        ('SE', 'Sudeste'),
+        ('CO', 'Centro-Oeste'),
+        ('SU', 'Sul'),
+    ]
+    regiao = models.CharField(max_length=2, choices=escolhaRegiao, default='NO')
+
     def __str__(self):
         return self.nome
 
-    def add_endereco(self, endereco):
-        self.enderecos.add(endereco)
-
-    def remove_endereco(self, endereco):
-        self.enderecos.remove(endereco)
+    @classmethod
+    def listar_por_regiao(cls):
+        ordem_regioes = ['NO', 'NE', 'SE', 'CO', 'SU']
+        return cls.objects.order_by(ordem_regioes.index('regiao'))
