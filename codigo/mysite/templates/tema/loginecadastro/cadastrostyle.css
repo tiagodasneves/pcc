@@ -24,7 +24,7 @@ body {
 h1 {
 	margin-bottom: 20px;
 	text-align: center;
-	color: #f89d35;
+	color: #000000;
 }
 
 form {
@@ -36,7 +36,7 @@ form {
 label {
 	display: block;
 	margin-bottom: 5px;
-	color: #f89d35;
+	color: #000000;
 }
 
 input {
@@ -54,6 +54,13 @@ button {
 	border-radius: 5px;
 	font-size: 16px;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	flex-direction: column;
+	align-items: center;
+	
+}
 }
 
 button:hover {
