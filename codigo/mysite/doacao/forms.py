@@ -1,11 +1,14 @@
-from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
-from .models import Pessoa
+from .models import Doacao, Peruca
 
-class PessoaForm(ModelForm):
+class DoacaoForm(ModelForm):
     
     class Meta:
-        model = Pessoa
+        model = Doacao
+        fields = "__all__"
+
+class PerucaForm(ModelForm):
+    
+    class Meta:
+        model = Peruca
         fields = "__all__"

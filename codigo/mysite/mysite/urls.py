@@ -16,14 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('paginas.urls')),
-    path('cadastrar_pessoa/', views.cadastrar_pessoa, name='cadastrar_pessoa'),
-    path('editar_pessoa/<int:id>/', views.editar_pessoa, name='editar_pessoa'),
-    path('excluir_pessoa/<int:id>/', views.excluir_pessoa, name='excluir_pessoa'),
 ]
 
 #Add Django site authentication urls (for login, logout, password management)
