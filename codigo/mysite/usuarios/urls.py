@@ -7,6 +7,8 @@ urlpatterns = [
     path('editar_pessoa/<int:id>/', views.editar_pessoa, name='editar_pessoa'),
     path('excluir_pessoa/<int:id>/', views.excluir_pessoa, name='excluir_pessoa'),
     path('criar_depoimento/', views.criar_depoimento, name='criar_depoimento'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     #urls de depoimento
     path('editar_depoimento/<int:pk>/', views.editar_depoimento, name='editar_depoimento'),
     path('excluir_depoimento/<int:pk>/', views.excluir_depoimento, name='excluir_depoimento'),
