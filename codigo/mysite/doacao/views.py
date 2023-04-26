@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Doacao, Peruca
 from .forms import DoacaoForm, PerucaForm
 
 # views de doação
+@login_required
 def solicitarDoacao(request):
     if request.method == 'POST':
         form = DoacaoForm(request.POST)
@@ -13,6 +15,7 @@ def solicitarDoacao(request):
         form = DoacaoForm()
     return render(request, 'solicitar_doacao.html', {'form': form})
 
+@login_required
 def cancelarSolicitacao(request, id):
     doacao = Doacao.objects.get(id=id)
     doacao.delete()

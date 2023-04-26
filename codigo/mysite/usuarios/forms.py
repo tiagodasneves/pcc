@@ -18,3 +18,9 @@ class EnderecoForm(ModelForm):
     class Meta:
         model = Endereco
         fields = "__all__"
+
+class LoginForm(ModelForm):
+    
+    class Meta:
+        model = Pessoa
+        fields = "__all__"
