@@ -3,10 +3,6 @@ from .models import Doacao, Peruca
 from .forms import DoacaoForm, PerucaForm
 
 # views de doação
-def listarDoacao(request):
-    doacoes = Doacao.objects.all().order_by('data')
-    return render(request, 'listar_doacoes.html', {'doacoes': doacoes})
-
 def solicitarDoacao(request):
     if request.method == 'POST':
         form = DoacaoForm(request.POST)
@@ -27,6 +23,10 @@ def analisarSolicitacao(request, id, status):
     doacao.status = status
     doacao.save()
     return redirect('listar_doacao')
+
+def listarDoacao(request):
+    doacoes = Doacao.objects.all().order_by('data')
+    return render(request, 'listar_doacoes.html', {'doacoes': doacoes})
 
 # views de peruca
 def criar_peruca(request):
