@@ -3,7 +3,7 @@ from django.db import models
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+    senha = models.CharField(max_length=100)
     cpf = models.CharField(max_length=11)
     telefone = models.CharField(max_length=20)
     email = models.EmailField(max_length=255, unique=True)
