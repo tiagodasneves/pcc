@@ -17,3 +17,9 @@ def login(request):
 
 def pagina_inicial(request):
     return render(request, 'templates/index.html')
+
+def cadastro(request):
+    if request.method == 'POST':
+        campo_senha = request.POST['senha']
+        campo_senha_confirma = request.POST['senha_confirmar']
+        email = 
