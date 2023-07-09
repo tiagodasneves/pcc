@@ -1,0 +1,36 @@
+body {
+    background-color: #008374;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .square {
+    background-color: #f85a40;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .square-link {
+    text-decoration: none;
+  }
+  
+  
