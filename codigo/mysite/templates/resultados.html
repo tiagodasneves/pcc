@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Questionários Respondidos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Questionários Respondidos</h1>
+
+  <table>
+    <tr>
+      <th>Resposta Questão 1</th>
+      <th>Resposta Questão 2</th>
+      <th>Resposta Questão 3</th>
+    </tr>
+    {% for questionario in questionarios %}
+    <tr>
+      <td>{{ questionario.quest1 }}</td>
+      <td>{{ questionario.quest2 }}</td>
+      <td>{{ questionario.quest3 }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

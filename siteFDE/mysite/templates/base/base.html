@@ -1,0 +1,37 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django exemplo autenticação</title>
+    <link rel="stylesheet" href="{% static 'css/main/style.css' %}">
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-left">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'pagina1' %}">Solicitações</a>
+        <a href="{% url 'pagina2' %}">Encomendas</a>
+        <a href="{% url 'depoimentos' %}">Depoimentos</a>
+        {% if request.user.is_staff%}
+        <a href="{% url 'ler_usuarios' %}">Administração</a>
+        {% endif %}
+      </div>
+      <div class="navbar-right">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'editar_perfil' request.user.id %}">Seu Perfil</a>
+          <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+          <a href="{% url 'cadastro' %}">Cadastre-se</a>
+          <a href="{% url 'login' %}">Entrar</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+  
+  </body>
+</html>

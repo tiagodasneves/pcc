@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/accounts/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section-title">Login</div>
+        <div class="section-divider"></div>
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div>
+                <label for="username">Username:</label>
+                <br>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Senha:</label>
+                <br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <br>
+                {{ msg }}
+            </div>
+            <div>
+                <br>
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+
+        <div>
+            <br>
+            <label>Ainda não possui uma conta?</label>
+            <a href="{%url 'cadastro' %}"><button>Cadastre-se</button></a>
+        </div>
+    </div>
+</body>
+</html>
