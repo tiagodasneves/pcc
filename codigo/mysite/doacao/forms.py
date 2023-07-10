@@ -1,14 +1,7 @@
-from django.forms import ModelForm
-from .models import Doacao, Peruca
+from django import forms
+from .models import Doacao
 
-class DoacaoForm(ModelForm):
-    
+class DoacaoForm(forms.ModelForm):
     class Meta:
         model = Doacao
-        fields = "__all__"
-
-class PerucaForm(ModelForm):
-    
-    class Meta:
-        model = Peruca
-        fields = "__all__"
+        fields = ['quest1', 'quest2', 'quest3']

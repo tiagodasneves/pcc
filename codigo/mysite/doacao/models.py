@@ -20,7 +20,7 @@ class Doacao(models.Model):
         ('caminho', 'Encomenda à caminho'),
         ('recebido', 'Encomenda recebida'),
     ]
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    #pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
     perucas = models.ManyToManyField(Peruca)
     data_solicitacao = models.DateTimeField(auto_now_add=True)
     codRastreio = models.CharField(max_length=20)
@@ -30,3 +30,10 @@ class Doacao(models.Model):
     status = models.CharField(max_length=10, choices=opcoesStatus)
     id = models.AutoField(primary_key=True)
 
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
