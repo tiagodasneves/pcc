@@ -1,42 +1,16 @@
-from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
-class Pessoa(models.Model):
-    nome = models.CharField(max_length=100)
-    senha = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=11)
-    telefone = models.CharField(max_length=20)
-    email = models.EmailField(max_length=255, unique=True)
-    id = models.AutoField(primary_key=True)
+class Usuario(AbstractUser):
+    nome=models.CharField(max_length=200, null=True)
+    sobrenome=models.CharField(max_length=200, null=True)
+    telefone=models.CharField(max_length=16, null=True)
+    rua = models.CharField(max_length=100, null=True)
+    numero=models.IntegerField(null=True)
+    bairro=models.CharField(max_length=100, null=True)
+    cidade = models.CharField(max_length=100, null=True)
+    estado = models.CharField(max_length=100, null=True)
 
-    def __str__(self):
-        return self.nome
+    groups = models.ManyToManyField(Group, related_name='usuarios')
+    user_permissions = models.ManyToManyField(Permission, related_name='usuarios')
 
-class Endereco(models.Model):
-    escolhaRegiao = [
-        ('NO', 'Norte'),
-        ('NE', 'Nordeste'),
-        ('SE', 'Sudeste'),
-        ('CO', 'Centro-Oeste'),
-        ('SU', 'Sul'),
-    ]
-    rua = models.CharField(max_length=255)
-    num = models.IntegerField
-    bairro = models.CharField(max_length=255)
-    cidade = models.CharField(max_length=255)
-    estado = models.CharField(max_length=2)
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    regiao = models.CharField(max_length=2, choices=escolhaRegiao, default='NO')
-    id = models.AutoField(primary_key=True)
-
-    def __str__(self):
-        return f'{self.rua}, {self.bairro}, {self.cidade} - {self.estado}'
-
-class Depoimento(models.Model):
-    relato = models.TextField()
-    data = models.DateField(auto_now_add=True)
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    id = models.AutoField(primary_key=True)
-
-    def __str__(self):
-        return self.relato

@@ -1,0 +1,18 @@
+.perucas-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .peruca-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .peruca-item img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .peruca-item p {
+    margin: 0;
+  }

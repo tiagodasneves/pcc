@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+  <h1>Depoimentos:</h1>
+  <ul>
+    {% for depoimento in depoimentos %}
+      <li>
+        <h3>{{ depoimento.autor }}</h3>
+        <p>{{ depoimento.conteudo }}</p>
+        {% if depoimento.autor == request.user %}
+          <button class="editar-button" data-id="{{ depoimento.id }}">Editar</button>
+          <br>
+          <br>
+          <form class="edit-form" action="{% url 'editar_depoimento' depoimento.id %}" method="POST" style="display: none;">
+            {% csrf_token %}
+            <textarea name="conteudo" rows="6" cols="100" required>{{ depoimento.conteudo }}</textarea>
+            <br>
+            <button type="submit">Salvar</button>
+          </form>
+        {% else %}
+          <p>{{ depoimento.conteudo }}</p>
+        {% endif %}
+        <form action="{% url 'deletar_depoimento' depoimento.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">Excluir</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Escreva seu depoimento também!</h2>
+
+  <form method="POST" action="{% url 'criar_depoimento' %}">
+    {% csrf_token %}
+    <div>
+      <textarea name="conteudo" rows="6" cols="100" placeholder="Escreva aqui o seu depoimento" required></textarea>
+      <br>
+      <br>
+      <input type="submit" value="Salvar">
+    </div>
+  </form>
+
+  <!-- Essa parte eu copiei do ChatGPT, pois eu queria que o botão de editar continuasse na mesma página -->
+  <script>
+    const editButtons = document.querySelectorAll('.editar-button');
+    const editForms = document.querySelectorAll('.edit-form');
+
+    editButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        editForms[index].style.display = 'block';
+      });
+    });
+  </script>
+{% endblock %}

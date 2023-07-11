@@ -1,0 +1,18 @@
+<h1>Minhas Solicitações</h1>
+
+{% if solicitacoes %}
+  <ul>
+    {% for solicitacao in solicitacoes %}
+      <li>
+        <strong>ID:</strong> {{ solicitacao.id }}<br>
+        <strong>Status:</strong> {{ solicitacao.status }}<br>
+        <!-- Outras informações da solicitação -->
+        <!-- ... -->
+
+        <a href="{% url 'detalhes_solicitacao' solicitacao.id %}">Detalhes</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Você não possui solicitações ainda</p>
+{% endif %}
