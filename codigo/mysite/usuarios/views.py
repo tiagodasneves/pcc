@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Usuario
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, "core/index.html")
 
 def cadastro(request):
     if request.method == 'POST':

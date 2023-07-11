@@ -34,6 +34,22 @@
       
       <label for="id_comprovante">Comprovante:</label>
       <input type="file" id="id_comprovante" name="comprovante">
+
+      <label for="id_rua">Rua:</label>
+      <input type="text" name="rua" value="{{ request.user.rua }}" required>
+
+      <label for="id_numero">Número:</label>
+      <input type="text" name="numero" value="{{ request.user.numero }}" required>
+
+      <label for="id_bairro">Bairro:</label>
+      <input type="text" name="bairro" value="{{ request.user.bairro }}" required>
+
+      <label for="id_cidade">Cidade:</label>
+      <input type="text" name="cidade" value="{{ request.user.cidade }}" required>
+
+      <label for="id_estado">Estado:</label>
+      <input type="text" name="estado" value="{{ request.user.estado }}" required>
+
       
       <button type="submit">Enviar Solicitação</button>
     </form>

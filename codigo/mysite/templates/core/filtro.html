@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Visualização de Solicitações de Peruca</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fillto.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Visualização de Solicitações de Peruca</h1>
+        <form>
+            <div class="form-group">
+                <label for="filtro-status">Filtrar por Status:</label>
+                <select class="form-control" id="filtro-status">
+                    <option value="">Todos</option>
+                    <option value="aprovado">Aprovado</option>
+                    <option value="cancelado">Cancelado</option>
+                    <option value="andamento">Em Andamento</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+        <hr>
+        <div class="solicitacoes">
+        </div>
+        <a href="#" class="btn btn-secondary btn-voltar">Voltar</a>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

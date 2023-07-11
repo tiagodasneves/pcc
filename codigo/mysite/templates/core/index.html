@@ -1,0 +1,473 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Impact Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/logo.png'%}" rel="icon">
+  <link href="{% static 'img/logo.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+ 
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Impact
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">fiosdeesperanca@gmail.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>77 9 0000-0000</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Fes<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'fazer_solicitacao' %}">Fazer solicitação</a></li>
+          <li><a href="{% url 'minhas_solicitacoes' %}">Acompanhar Encomenda</a></li>
+          {% if request.user.is_staff%}
+          <li class="dropdown"><a href="#"><span>Administração</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="{% url 'ler_usuarios'%}">Lista de Usuários</a></li>
+              <li><a href="{% url 'listar_perucas' %}">Banco de Perucas</a></li>
+              <li><a href="{% url 'listar_solicitacoes' %}">Lista de Solicitações</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'editar_perfil' request.user.id %}">Seu Perfil</a></li>
+          <li><a href="{% url 'logout' %}">Sair</a></li>
+          {% else %}
+          <li><a href="{% url 'cadastro' %}">Cadastre-se</a></li>
+          <li><a href="{% url 'login' %}">Entrar</a></li>
+          {% endif %}
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+    <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+          <h2>Fios de <span> Esperança </span></h2>
+          <p>Doe cabelo, transforme vidas! Sua doação pode fazer toda a diferença, proporcionando esperança e confiança para quem enfrenta a perda de cabelo. Juntos, podemos ajudar a confeccionar perucas e levar alegria às vidas daqueles que mais precisam. Faça parte dessa causa e seja a inspiração que alguém está esperando!</p>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <a href="#about" class="btn-get-started">Doar Agora</a>
+            <a href="https://www.youtube.com/watch?v=wtrSa7MvjNs&ab_channel=AnaCarolina" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Assita o Vídeo</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="{% static 'img/hero-img.svg' %}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
+        </div>
+      </div>
+    </div>
+
+    <div class="icon-boxes position-relative">
+      <div class="container position-relative">
+        <div class="row gy-4 mt-5">
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a class="stretched-link">Transforme vidas!</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-gem"></i></div>
+              <h4 class="title"><a class="stretched-link">Espalhe alegria!</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-geo-alt"></i></div>
+              <h4 class="title"><a  class="stretched-link">Seja solidário!</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-command"></i></div>
+              <h4 class="title"><a class="stretched-link">Doe Cabelos!</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Como Doar?</h2>
+          <p>Descubra o poder da doação! Veja o passo a passo para doar cabelo e faça a diferença hoje mesmo!</p>
+        </div>
+
+          <div class="row gy-4 portfolio-container">
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/passo1.png' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo1.png'%}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 1</a></h4>
+                  <p>Antes de cortar o cabelo, entre em contato com a fios de esperança para tirar as dúvidas </p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/product-1.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo2.png' %}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 2</a></h4>
+                  <p> Messa seu cabelo. O cabelo para ser doado deve ter no mínimo 20cm</p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/branding-1.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo3.jpg' %}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 3</a></h4>
+                  <p>Amarre o cabelo com um elástico e corte o cabelo ou se preferir vai em um salão</p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/books-1.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo4.png' %}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 4</a></h4>
+                  <p> Embale o cabelo em um saco plástico seguro e resistente e coloque em uma caixa </p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/app-2.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo55.png' %}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 5</a></h4>
+                  <p>Vá aos Correios e envie para o nosso endereço indicado em nosso site</p>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+              <div class="portfolio-wrap">
+                <a href="{% static 'img/portfolio/product-2.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'img/portfolio/passo6.png' %}" class="img-fluid" alt=""></a>
+                <div class="portfolio-info">
+                  <h4><a href="portfolio-details.html" title="More Details">Passo 6</a></h4>
+                  <p>Tire uma foto e nos marque @fiosdeesperanca</p>
+                </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3>Perguntas <strong>Frequentes</strong></h3>
+              <p>
+                Você tem alguma pergunta sobre a doação de cabelo? Entre em contato conosco enviando um e-mail para fiosdeesperanca@gmail.com. Estamos aqui para ajudar e esclarecer qualquer dúvida que você possa ter!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <span class="num">1.</span>
+                    Qual é o propósito da nossa ONG em relação à doação de cabelo?
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    A nossa ONG tem como propósito coletar cabelos doados e confeccionar perucas para pessoas que enfrentam a perda de cabelo devido a condições médicas, como câncer ou alopecia. Nosso objetivo é oferecer apoio emocional e ajudar na recuperação da autoestima dessas pessoas.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <span class="num">2.</span>
+                    Quais são os requisitos para doar cabelo para a nossa ONG?
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Para doar cabelo para nossa ONG, o comprimento mínimo exigido é de 20 centímetros. São aceitos todos os tipos de cabelos, até cabelos com química. Fios grisalhos ou brancos também são aceitos.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <span class="num">3.</span>
+                    Como posso enviar minha doação de cabelo para a ONG?
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Para enviar sua doação de cabelo para a nossa ONG, você pode embalar o cabelo em um saco plástico seguro e resistente, colocar em uma caixa e enviá-lo para o endereço indicado em nosso site. Certifique-se de seguir as instruções de embalagem fornecidas para garantir que o cabelo chegue em boas condições.
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <span class="num">4.</span>
+                    Existe algum custo envolvido na doação de cabelo para a ONG?
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Não há custos associados à doação de cabelo para nossa ONG. Agradecemos imensamente sua contribuição e cobrimos os custos relacionados à confecção das perucas.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <span class="num">5.</span>
+                    Para onde vão as perucas confecionadas?
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    As perucas confeccionadas a partir das doações de cabelo são destinadas a pessoas que enfrentam a perda de cabelo devido a condições médicas, como câncer ou alopecia. Elas são distribuídas para essas pessoas, proporcionando apoio emocional, confiança e ajudando-as a enfrentar essa fase com mais conforto e dignidade.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Recent Blog Posts Section ======= -->
+    <section id="recent-posts" class="recent-posts sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Últimos depoimentos</h2>
+          <p>Descubra o poder transformador das perucas! Leia os inspiradores depoimentos de pessoas que receberam perucas durante o tratamento contra o câncer. Veja como essas doações fizeram a diferença em suas vidas e trouxeram confiança e esperança.</p>
+        </div>
+
+        <div class="row gy-4">
+
+          <div class="col-xl-4 col-md-6">
+            <article>
+
+              
+
+              <p class="post-category">Ana Maria</p>
+
+              <h2 class="title">
+                <a href="blog-details.html">Receber uma peruca fez toda a diferença durante meu tratamento contra o câncer. Quando perdi meu cabelo, senti que estava perdendo parte da minha identidade e minha autoestima estava abalada. Mas quando recebi a peruca, foi como se eu tivesse uma parte de mim de volta. A peruca me ajudou a me sentir mais confiante e bonita, permitindo-me enfrentar o câncer com mais força e coragem.</a>
+              </h2>
+
+              <div class="d-flex align-items-center">
+              
+                <div class="post-meta">
+                  <p class="post-date">
+                    <time datetime="2022-01-01">Jan 1, 2022</time>
+                  </p>
+                </div>
+              </div>
+
+            </article>
+          </div><!-- End post list item -->
+
+          <div class="col-xl-4 col-md-6">
+            <article>
+
+              <p class="post-category">Luciana da Silva</p>
+
+              <h2 class="title">
+                <a href="blog-details.html">A perda de cabelo durante o tratamento contra o câncer foi um desafio emocional para mim. Mas graças à generosidade de doadores e organizações que confeccionam perucas, eu recebi uma peruca maravilhosa. Essa peruca não apenas cobriu minha perda de cabelo, mas também me proporcionou uma sensação de normalidade em meio a um momento tão difícil. Ela me ajudou a me sentir mais confiante e bonita, permitindo-me enfrentar cada dia com uma atitude mais positiva.</a>
+              </h2>
+
+              <div class="d-flex align-items-center">
+                <div class="post-meta">
+                  <p class="post-date">
+                    <time datetime="2022-01-01">Jun 5, 2022</time>
+                  </p>
+                </div>
+              </div>
+
+            </article>
+          </div><!-- End post list item -->
+
+          <div class="col-xl-4 col-md-6">
+            <article>
+
+              <p class="post-category">Madalena Souza</p>
+
+              <h2 class="title">
+                <a href="blog-details.html">Quando descobri que precisaria passar por tratamentos intensivos de quimioterapia, uma das minhas preocupações era perder meu cabelo. Porém, graças à doação de cabelo e às perucas disponibilizadas, eu pude enfrentar esse desafio com um pouco mais de leveza. A peruca que recebi me ajudou a manter minha autoestima elevada e me deu a oportunidade de me sentir bonita e normal novamente, mesmo quando meu cabelo natural estava em fase de crescimento. Sou imensamente grata por ter tido acesso a essa peça tão especial.</a>
+              </h2>
+
+              <div class="d-flex align-items-center">
+                <div class="post-meta">
+                  <p class="post-date">
+                    <time datetime="2022-01-01">Jun 22, 2022</time>
+                  </p>
+                </div>
+              </div>
+
+            </article>
+          </div><!-- End post list item -->
+
+        </div><!-- End recent posts list -->
+
+      </div>
+    </section><!-- End Recent Blog Posts Section -->
+
+   
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Fes.</span>
+          </a>
+          <p>Fes (Fios de Esperança) é uma plataforma de doaçao de perucas.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+       
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Doação em Dinheiro</h4>
+          <p>PIX: 77 9 0000-0000</p>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Endereço</h4>
+          <p>
+            Instituto Federal de Educação, Ciência e Tecnologia Baiano - Campus Guanambi<br>
+             Caixa Postal Nº 09 Distrito de, Saída p/ ceraíma - n, – Zona Rural, Guanambi - BA, 46430-000<br>
+            <br>
+            <strong>Phone:</strong> 77 9 0000-0000<br>
+            <strong>Email:</strong> fiosdeesperanca@gmail.com<br>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Impact</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
