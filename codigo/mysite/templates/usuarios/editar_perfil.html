@@ -2,68 +2,76 @@
 
 {% block content %}
 
-<h1>Olá {{usuario.nome}}!</h1>
-<h1> Seu perfil: </h1>
-            
-            <form action="{% url 'editar_perfil' usuario.id %}" method="POST"> {% csrf_token %}
-                <div class="section-title">Dados Pessoais</div>
-                <div class="section-divider"></div>
-                <div>
-                    <label>Username: {{usuario.username}}</label>
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+</head>
+
+  <body>
+    <div class="centered-div">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="registration-form">
+                <div class="titulo">
                     <br>
-                    <label>Email: {{usuario.email}}</label>
-                    <br>
-                    <br>
-                <div>
-                    <label>Nome:</label>
-                    <br>
-                    <input type="text" name="nome" value="{{usuario.nome}}" required>
+                    <h2>Olá {{usuario.nome}}! Esse é o seu perfil: </h2>
                 </div>
-                <div>
-                    <label>Sobrenome:</label>
+            <form method="POST" action="{% url 'editar_perfil' usuario.id %}">
+                {% csrf_token %}
+                <div class="titulo2">
+                    <h4> &zwnj; Dados Pessoais &zwnj; </h4>
                     <br>
-                    <input type="text" name="sobrenome" value="{{usuario.sobrenome}}" required>
+                    <br>
                 </div>
-                <div>
-                    <label>Telefone:</label>
-                    <br>
-                    <input type="text" name="telefone" value="{{usuario.telefone}}" required>
+                <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" class="form-control" value="{{usuario.nome}}" required>
                 </div>
-                <div>
-                    <br>
-                    {{ msg }}
+                <div class="form-group">
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" id="sobrenome" name="sobrenome" class="form-control" value="{{usuario.sobrenome}}" required>
                 </div>
-                <div class="section-title">Endereço</div>
-                <div class="section-divider"></div>
-                <div>
-                    <label>Rua:</label>
-                    <br>
-                    <input type="text" name="rua" value="{{usuario.rua}}" required>
+                <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" name="telefone" class="form-control" value="{{usuario.telefone}}" required>
                 </div>
-                <div>
-                    <label>Número:</label>
+                <br>
+                <div class="titulo2">
+                    <h4> &zwnj; Endereço &zwnj; </h4>
                     <br>
-                    <input type="text" name="numero" value="{{usuario.numero}}" required>
+                    <br>
                 </div>
-                <div>
-                    <label>Bairro:</label>
-                    <br>
-                    <input type="text" name="bairro" value="{{usuario.bairro}}" required>
+                <div class="form-group">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" name="rua" class="form-control" value="{{usuario.rua}}" required>
                 </div>
-                <div>
-                    <label>Cidade:</label>
-                    <br>
-                    <input type="text" name="cidade" value="{{usuario.cidade}}" required>
+                <div class="form-group">
+                <label for="numero">Número</label>
+                <input type="number" id="numero" name="numero" class="form-control" value="{{usuario.numero}}" required>
                 </div>
-                <div>
-                    <label>Estado:</label>
-                    <br>
-                    <input type="text" name="estado" value="{{usuario.estado}}" required>
+                <div class="form-group">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" id="bairro" name="bairro" class="form-control" value="{{usuario.bairro}}" required>
                 </div>
-                <div>
-                    <br>
-                    <button type="submit">Confirmar</button>
+                <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" class="form-control" value="{{usuario.cidade}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado</label>
+                    <input type="text" id="estado" name="estado" class="form-control" value="{{usuario.estado}}" required>
+                </div>
+                <br>
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Atualizar Perfil</button>
                 </div>
             </form>
-
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    </body>
 {% endblock %}

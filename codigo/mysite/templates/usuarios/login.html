@@ -1,43 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'css/accounts/style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Login</title>
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  
 </head>
 <body>
-    <div class="container">
-        
-        <div class="section-title">Login</div>
-        <div class="section-divider"></div>
-
-        <form method="POST" action="{% url 'login' %}">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="login-form">
+          <h2 class="text-center">Login</h2>
+          <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            <div>
-                <label for="username">Username:</label>
-                <br>
-                <input type="text" id="username" name="username" required>
+            <div class="form-group">
+              <label for="username">Usuário</label>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu username">
+            </div>
+            <div class="form-group">
+              <label for="password">Senha</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
             </div>
             <div>
-                <label for="password">Senha:</label>
-                <br>
-                <input type="password" id="password" name="password" required>
+              {{ msg }}
+              <br>
+              <br>
+          </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </div>
-            <div>
-                <br>
-                {{ msg }}
+            <div class="form-group text-center">
+              <a href="{% url 'cadastro' %}" class="forgot-password">Cadastre-se</a>
             </div>
-            <div>
-                <br>
-                <button type="submit">Entrar</button>
-            </div>
-        </form>
-
-        <div>
-            <br>
-            <label>Ainda não possui uma conta?</label>
-            <a href="{%url 'cadastro' %}"><button>Cadastre-se</button></a>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+

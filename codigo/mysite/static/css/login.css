@@ -1,6 +1,13 @@
-body {
-  background-color: #008374;
-  font-family: Arial, sans-serif;
+li {
+  display: flex;
+  align-items: center;
+}
+
+.corner-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
 }
 
 .login-form {
@@ -14,7 +21,7 @@ body {
 }
 
 .form-group label {
-  color: #008374;
+  color: black;
 }
 
 .btn-primary {
@@ -29,4 +36,46 @@ body {
 
 .forgot-password {
   color: #008374;
+}
+
+body{
+  background-color: #b3dfda;
+  font-family: Arial, sans-serif;
+}
+
+.centered-div {
+  top: 50%;
+  left: 50%;
+  background-color: #b3dfda;
+  padding: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo2 h4 {
+  border-bottom: 3px solid #f85a40;
+  display: inline;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.registration-form {
+  background-color: white;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.registration-form h2 {
+  margin-bottom: 30px;
+}
+
+.btn-primary {
+  background-color: #f85a40;
+  border-color: #f85a40;
+}
+
+.btn-primary:hover {
+  background-color: #db4d35;
+  border-color: #db4d35;
 }

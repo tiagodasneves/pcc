@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Usuario
+from depoimentos.models import Depoimento
 
 def home(request):
-    return render(request, "core/index.html")
+    depoimentos = Depoimento.objects.all()
+    return render(request, 'core/index.html', {'depoimentos': depoimentos})
 
 def cadastro(request):
     if request.method == 'POST':
@@ -36,7 +38,7 @@ def cadastro(request):
             return render(request, 'usuarios/login.html')
 
     else:
-        return render (request, 'usuarios/cadastro.html')
+        return render (request, 'usuarios/cadastro2.html')
 
 def user_login (request):
     if request.method == "POST":
@@ -48,10 +50,10 @@ def user_login (request):
             login(request, usuario)
             return redirect(home)
         else:
-            return render(request, 'usuarios/login.html', {'msg': 'Credenciais inválidas!'})
+            return render(request, 'usuarios/login2.html', {'msg': 'Credenciais inválidas!'})
 
     else:
-        return render(request, 'usuarios/login.html')
+        return render(request, 'usuarios/login2.html')
     
 @login_required
 def sair(request):

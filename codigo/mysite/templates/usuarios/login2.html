@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/autenticacao.css' %}">
+</head>
+
+  <body>
+    <div class="centered-div">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <br>    
+            <br>
+            <div class="registration-form">
+                <div class="titulo">
+                    <h1> &zwnj; Login &zwnj; </h1>
+                    <br>
+                    <br>
+                </div>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Usuário</label>
+                      <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Senha</label>
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                    </div>
+                    <div>
+                      {{ msg }}
+                      <br>
+                      <br>
+                  </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </div>
+                  </form>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        </div>
+        </div>
+    </body>
+{% endblock %}

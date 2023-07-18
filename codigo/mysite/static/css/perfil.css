@@ -1,13 +1,17 @@
-body {
-    background-color: #008374;
+body{
+    background-color: #b3dfda;
     font-family: Arial, sans-serif;
-  }
+}
 
-  .form-group label {
-    color: black;
-  }
+.centered-div {
+    top: 50%;
+    left: 50%;
+    background-color: #b3dfda;
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  h1, h4 {
+.titulo2 h4 {
     border-bottom: 3px solid #f85a40;
     display: inline;
   }
@@ -35,4 +39,3 @@ body {
     background-color: #db4d35;
     border-color: #db4d35;
   }
-  
