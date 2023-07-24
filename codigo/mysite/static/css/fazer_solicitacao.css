@@ -1,0 +1,82 @@
+body{
+    background-color: #b3dfda;
+    font-family: Arial, sans-serif;
+}
+
+.centered-div {
+    top: 50%;
+    left: 50%;
+    background-color: #b3dfda;
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.titulo2 h4 {
+    border-bottom: 3px solid #f85a40;
+    display: inline;
+  }
+
+  .titulo {
+    text-align: center;
+  }
+  
+  .registration-form {
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    border: 4px solid #008374   ;
+    border-radius: 20px;
+  }
+  
+  .registration-form h2 {
+    margin-bottom: 30px;
+  }
+
+  label {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    background-color: #f85a40;
+    border-color: #f85a40;
+  }
+  
+  .btn-primary:hover {
+    background-color: #db4d35;
+    border-color: #db4d35;
+  }
+
+  h1, h4 {
+    border-bottom: 4px solid #f85a40;
+    display: inline;
+  }
+
+  .perucas-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .peruca-item {
+    margin: 5px;
+    border: 3px solid #008374;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    margin: 10px; /* Espaçamento entre as peruca-items */
+  }
+
+  .peruca-img {
+    width: 250px; /* Defina o tamanho desejado para a imagem */
+    height: auto; /* Isso garante que a proporção da imagem seja mantida */
+    border: 3px solid #f85a40;
+    border-radius: 10px;
+    margin: 10px; /* Espaçamento entre as peruca-items */   
+  }
+
+  .dentro_item{
+    margin: 10px; /* Espaçamento entre as peruca-items */
+  }

@@ -35,7 +35,7 @@ def cadastro(request):
                                                       estado=estado)
             novoUsuario.save()
 
-            return render(request, 'usuarios/login.html')
+            return render(request, 'usuarios/login2.html')
 
     else:
         return render (request, 'usuarios/cadastro2.html')

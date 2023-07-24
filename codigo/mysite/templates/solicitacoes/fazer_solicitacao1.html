@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sua Página</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/solicitacoes/style.css' %}">
+</head>
+<body>
+    <h1>Fazer Solicitação de Peruca</h1>
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'fazer_solicitacao' %}">
+      {% csrf_token %}
+      
+      <div class="perucas-container">
+        {% for peruca in perucas_disponiveis %}
+          <div class="peruca-item">
+            <input type="radio" id="peruca_{{ peruca.id }}" name="peruca" value="{{ peruca.id }}">
+            <label for="peruca_{{ peruca.id }}">
+              <img src="{{ peruca.foto.url }}" alt="Foto da Peruca">
+              <p>{{ peruca.tamanho }} - {{ peruca.tipo }} - {{ peruca.cor }}</p>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      
+      <label for="id_questao1">Questão 1:</label>
+      <textarea id="id_questao1" name="questao1" rows="3"></textarea>
+      
+      <label for="id_questao2">Questão 2:</label>
+      <textarea id="id_questao2" name="questao2" rows="3"></textarea>
+      
+      <label for="id_questao3">Questão 3:</label>
+      <textarea id="id_questao3" name="questao3" rows="3"></textarea>
+      
+      <label for="id_comprovante">Comprovante:</label>
+      <input type="file" id="id_comprovante" name="comprovante">
+
+      <label for="id_rua">Rua:</label>
+      <input type="text" name="rua" value="{{ request.user.rua }}" required>
+
+      <label for="id_numero">Número:</label>
+      <input type="text" name="numero" value="{{ request.user.numero }}" required>
+
+      <label for="id_bairro">Bairro:</label>
+      <input type="text" name="bairro" value="{{ request.user.bairro }}" required>
+
+      <label for="id_cidade">Cidade:</label>
+      <input type="text" name="cidade" value="{{ request.user.cidade }}" required>
+
+      <label for="id_estado">Estado:</label>
+      <input type="text" name="estado" value="{{ request.user.estado }}" required>
+
+      
+      <button type="submit">Enviar Solicitação</button>
+    </form>
+</body>
+</html>

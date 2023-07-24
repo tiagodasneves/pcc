@@ -1,0 +1,34 @@
+<h1>Editar Peruca</h1>
+
+<form method="post" enctype="multipart/form-data" action="{% url 'editar_peruca' peruca.pk %}">
+  {% csrf_token %}
+  
+  <label for="id_tamanho">Tamanho:</label>
+  <select id="id_tamanho" name="tamanho">
+    <option value="curto" {% if peruca.tamanho == 'curto' %}selected{% endif %}>Peruca de tamanho curto</option>
+    <option value="medio" {% if peruca.tamanho == 'medio' %}selected{% endif %}>Peruca de tamanho médio</option>
+    <option value="longo" {% if peruca.tamanho == 'longo' %}selected{% endif %}>Peruca de tamanho longo</option>
+  </select>
+  
+  <label for="id_tipo">Tipo:</label>
+  <select id="id_tipo" name="tipo">
+    <option value="liso" {% if peruca.tipo == 'liso' %}selected{% endif %}>Peruca de cabelo liso</option>
+    <option value="ondulado" {% if peruca.tipo == 'ondulado' %}selected{% endif %}>Peruca de cabelo ondulado</option>
+    <option value="cacheado" {% if peruca.tipo == 'cacheado' %}selected{% endif %}>Peruca de cabelo cacheado</option>
+    <option value="crespo" {% if peruca.tipo == 'crespo' %}selected{% endif %}>Peruca de cabelo crespo</option>
+  </select>
+  
+  <label for="id_cor">Cor:</label>
+  <select id="id_cor" name="cor">
+    <option value="loiro" {% if peruca.cor == 'loiro' %}selected{% endif %}>Peruca de cabelo loiro</option>
+    <option value="ruivo" {% if peruca.cor == 'ruivo' %}selected{% endif %}>Peruca de cabelo ruivo</option>
+    <option value="preto" {% if peruca.cor == 'preto' %}selected{% endif %}>Peruca de cabelo preto</option>
+    <option value="castanho" {% if peruca.cor == 'castanho' %}selected{% endif %}>Peruca de cabelo castanho</option>
+    <option value="grisalho" {% if peruca.cor == 'grisalho' %}selected{% endif %}>Peruca de cabelo grisalho</option>
+  </select>
+  
+  <label for="id_foto">Foto:</label>
+  <input type="file" id="id_foto" name="foto">
+  
+  <button type="submit">Salvar</button>
+</form>
