@@ -35,7 +35,6 @@ def editar_peruca(request, pk):
             peruca.tamanho = request.POST['tamanho']
             peruca.tipo = request.POST['tipo']
             peruca.cor = request.POST['cor']
-            peruca.foto = request.FILES.get('foto')
             peruca.save()
             return redirect('listar_perucas')
         else:

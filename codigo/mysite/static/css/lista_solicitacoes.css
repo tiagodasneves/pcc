@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, sans-serif;
+}
+
+.btn-primary {
+    background-color: #f85a40;
+    border-color: #f85a40;
+}
+  
+.btn-primary:hover {
+    background-color: #db4d35;
+    border-color: #db4d35;
+}
+
+h1 {
+    border-bottom: 4px solid #f85a40;
+    display: inline;
+}
+
+section {
+    padding: 50px;
+}
+
+p { 
+    font-weight: bold;
+}
+
+.lista-usuarios {
+    margin: 5px;
+    border: 3px solid #008374;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin: 10px; 
+    width: 100%;
+    padding: 20px;
+}
+
+.status-analise {
+    color: orange; 
+  }
+  
+  .status-aprovado {
+    color: blue; 
+  }
+  
+  .status-rejeitado {
+    color: red; 
+  }
+
+.status-caminho {
+    color: rgb(107, 41, 0); 
+}
+
+.status-entregue {
+    color: green; 
+}
