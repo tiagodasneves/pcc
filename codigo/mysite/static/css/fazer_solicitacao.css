@@ -64,19 +64,24 @@ body{
     background-color: #f8f8f8;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens verticalmente */
-    margin: 10px; /* Espaçamento entre as peruca-items */
+    align-items: center; 
+    justify-content: center; 
+    margin: 10px;
   }
 
+  
   .peruca-img {
-    width: 250px; /* Defina o tamanho desejado para a imagem */
-    height: auto; /* Isso garante que a proporção da imagem seja mantida */
+    width: 250px; 
+    height: auto; 
     border: 3px solid #f85a40;
     border-radius: 10px;
-    margin: 10px; /* Espaçamento entre as peruca-items */   
+    margin: 10px;   
   }
 
   .dentro_item{
-    margin: 10px; /* Espaçamento entre as peruca-items */
+    margin: 10px;
+  }
+
+  img{
+    max-width: 100%;
   }

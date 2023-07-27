@@ -12,7 +12,7 @@ def cadastrar_peruca(request):
             foto = request.FILES['foto']
             peruca = Peruca(tamanho=tamanho, tipo=tipo, cor=cor, foto=foto, selecionada=False)
             peruca.save()
-            return redirect('minhas_solicitacoes')
+            return redirect('listar_perucas')
         else:
             return render(request, 'solicitacoes/perucas.html')
     else:

@@ -370,10 +370,8 @@
           <form method="POST" action="{% url 'criar_depoimento' %}" class="form-content">
             {% csrf_token %}
             <div>
-              <textarea name="conteudo" rows="4" cols="152" placeholder="Escreva aqui o seu depoimento" required></textarea>
-              <br>
-              <br>
-              <input type="submit" value="Salvar" class="btn-salvar">
+            <textarea name="conteudo" rows="4" cols="152" placeholder="Escreva aqui o seu depoimento" class="comentario" required></textarea>
+            <br> <br> <input type="submit" value="Salvar" class="btn-salvar">
             </div>
           </form>
         </div>

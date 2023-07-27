@@ -1,54 +1,53 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Login</title>
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/login.css' %}">
-  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/autenticacao.css' %}">
 </head>
-<body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="login-form">
-          <h2 class="text-center">Login</h2>
-          <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="username">Usuário</label>
-              <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu username">
+
+  <body>
+    <div class="centered-div">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <br>    
+            <br>
+            <div class="registration-form">
+                <div class="titulo">
+                    <h1> &zwnj; Login &zwnj; </h1>
+                    <br>
+                    <br>
+                </div>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Usuário</label>
+                      <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu username">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Senha</label>
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
+                    </div>
+                    <div>
+                      {{ msg }}
+                      <br>
+                      <br>
+                  </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    </div>
+                  </form>
             </div>
-            <div class="form-group">
-              <label for="password">Senha</label>
-              <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha">
-            </div>
-            <div>
-              {{ msg }}
-              <br>
-              <br>
-          </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-            </div>
-            <div class="form-group text-center">
-              <a href="{% url 'cadastro' %}" class="forgot-password">Cadastre-se</a>
-            </div>
-          </form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
-
+        </div>
+        </div>
+    </body>
+{% endblock %}
