@@ -35,10 +35,10 @@ def cadastro(request):
                                                       estado=estado)
             novoUsuario.save()
 
-            return render(request, 'usuarios/login2.html')
+            return render(request, 'usuarios/login.html')
 
     else:
-        return render (request, 'usuarios/cadastro2.html')
+        return render (request, 'usuarios/cadastro.html')
 
 def user_login (request):
     if request.method == "POST":
@@ -50,10 +50,10 @@ def user_login (request):
             login(request, usuario)
             return redirect(home)
         else:
-            return render(request, 'usuarios/login2.html', {'msg': 'Credenciais inválidas!'})
+            return render(request, 'usuarios/login.html', {'msg': 'Credenciais inválidas!'})
 
     else:
-        return render(request, 'usuarios/login2.html')
+        return render(request, 'usuarios/login.html')
     
 @login_required
 def sair(request):
