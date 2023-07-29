@@ -17,10 +17,13 @@
                 <div class="titulo">
                     <br> <h1> &zwnj; Solicitação de {{solicitacao.usuario.nome}} {{solicitacao.usuario.sobrenome}} &zwnj; </h1> <br> <br> <br>
                 </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
                 <form method="post" enctype="multipart/form-data" action="{% url 'fazer_solicitacao' %}"> {% csrf_token %}
 >>>>>>> Stashed changes
+=======
+>>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
                     <div>
                         <h4> &zwnj; Respostas do Formulário &zwnj; </h4> <br> <br>
                     </div>
@@ -42,6 +45,7 @@
                             <img src="{{ solicitacao.comprovante.url }}" alt="Comprovante">
                         </div>
                     </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                     {% if solicitacao.peruca %}
                     <div>
@@ -51,12 +55,18 @@
                         <br> <h4> &zwnj; Perucas &zwnj; </h4> <br> <br>
                         <p> Escolha, dentre as perucas abaixo, aquela que você achar que combine mais com você! </p>
 >>>>>>> Stashed changes
+=======
+                    {% if solicitacao.peruca %}
+                    <div>
+                        <br> <h4> &zwnj; Peruca escolhida &zwnj; </h4> <br> <br>
+>>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
                     </div>
                     <div class="perucas-container">
                           <div class="peruca-item">
                             <img src="{{ solicitacao.peruca.foto.url }}" alt="Peruca">
                           </div>
                       </div>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                     {% endif %}
                     <div>
@@ -123,36 +133,77 @@
                   {% endif %}
                 </div>
 =======
+=======
+                    {% endif %}
+>>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
                     <div>
-                        <br> <h4> &zwnj; Seu endereço &zwnj; </h4> <br> <br>
-                        <p> Esse será o endereço para onde será encaminhada a sua peruca </p>
+                        <br> <h4> &zwnj; Endereço &zwnj; </h4> <br> <br>
                     </div>
                     <div class="form-group">
                       <label for="rua">Rua</label>
-                      <input type="text" id="rua" name="rua" class="form-control" value="{{ request.user.rua }}" required>
+                      <p> {{ request.user.rua }} </p>
                     </div>
                     <div class="form-group">
                       <label for="numero">Número</label>
-                      <input type="number" id="numero" name="numero" class="form-control" value="{{ request.user.numero }}" required>
+                      <p> {{ request.user.numero }} </p>
                     </div>
                     <div class="form-group">
                         <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro" class="form-control" value="{{ request.user.bairro }}" required>
+                        <p> {{ request.user.bairro }} </p>
                       </div>
                     <div class="form-group">
                       <label for="cidade">Cidade</label>
-                      <input type="text" id="cidade" name="cidade" class="form-control" value="{{ request.user.cidade }}" required>
+                      <p> {{ request.user.cidade }} </p>
                     </div>
                     <div class="form-group">
                         <label for="estado">Estado</label>
-                        <input type="text" id="estado" name="estado" class="form-control" value="{{ request.user.estado }}" required>
+                        <p> {{ request.user.estado }} </p>
                       </div>
                     <br>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block"> Enviar solicitação </button>
+
+                    <div>
+                      <h4> &zwnj; Pedido {{ solicitacao.get_status_display }} &zwnj; </h4> <br> <br>
                     </div>
+<<<<<<< HEAD
                 </form>
 >>>>>>> Stashed changes
+=======
+                <div class="form-group">
+                      {% if request.user.is_staff %}
+                      {% if solicitacao.status == 'analise'%}
+                        <div class="d-flex justify-content-start">
+                          <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
+                              {% csrf_token %}
+                              <input type="submit" class="btn btn-success me-2" value="Aprovar">
+                          </form>
+                          <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
+                              {% csrf_token %}
+                              <input type="submit" class="btn btn-danger" value="Rejeitar">
+                          </form>
+                        </div>
+                      {% elif solicitacao.status == 'aprovado'%}
+                        <form action="{% url 'addCR' solicitacao.id %}" method="POST">
+                            {% csrf_token %}
+                            <label for="id_codRastreio">Código de Rastreio:</label>
+                            <input type="text" id="id_codRastreio" name="codRastreio">
+                            <br>
+                            <br>
+                            <input type="submit" class="btn btn-primary btn-block" value="Adicionar Código de Rastreio">
+                        </form>
+                      {% endif %}
+                  {% endif %}
+                  {% if solicitacao.status == 'caminho' %}
+                    <p>Código de Rastreio: {{ solicitacao.codRastreio }}</p>
+                    {% if solicitacao.usuario == request.user%}
+                        <form action="{% url 'finalizar_entrega' solicitacao.id %}" method="POST">
+                            {% csrf_token %}
+                            <label> Já recebeu a sua encomenda? </label>
+                            <input type="submit" class="btn btn-primary btn-block" value="Finalizar Entrega">
+                        </form>
+                    {% endif %}
+                  {% endif %}
+                </div>
+>>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
             </div>
         </div>
         </div>
