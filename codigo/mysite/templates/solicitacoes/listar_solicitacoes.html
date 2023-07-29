@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="{% static 'css/lista_solicitacoes.css' %}">
 </head>
 
+<<<<<<< Updated upstream
 <body>
+=======
+  <body>
+>>>>>>> Stashed changes
     <section clas="lista">
         <div class="titulo">
             <br> <br> <h1> &zwnj; Lista de Solicitações &zwnj; </h1> <br> <br> 
@@ -36,6 +40,25 @@
       {% empty %}
         <p>Nenhuma solicitação encontrada.</p>
       {% endfor %}
+<<<<<<< Updated upstream
     </section>
 </body>
+=======
+
+        <div>
+            {% for usuario in usuarios %}
+                <div class="lista-usuarios">
+                    <strong> {{usuario.id}} - {{usuario.nome}} {{usuario.sobrenome}}</strong>
+                    <p> {{usuario.cidade}}, {{usuario.estado}} </p>
+                    <div class="d-flex justify-content-start">
+                        <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-primary me-2">Editar</a>
+                        <a href="{% url 'deletar_usuario' usuario.id %}" class="btn btn-danger">Deletar</a>
+                    </div>                    
+                </div> 
+            {% endfor %}
+        </div>
+
+    </section>
+    </body>
+>>>>>>> Stashed changes
 {% endblock %}

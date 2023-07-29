@@ -1,0 +1,12 @@
+<h1>Listagem de Solicitações</h1>
+
+{% for solicitacao in solicitacoes %}
+  <div class="solicitacao-item">
+    <a href="{% url 'detalhes_solicitacao' solicitacao.id %}">
+      <p>Usuário: {{ solicitacao.usuario.nome }}</p>
+      <p>Status: {{ solicitacao.get_status_display }}</p>
+    </a>
+  </div>
+{% empty %}
+  <p>Nenhuma solicitação encontrada.</p>
+{% endfor %}

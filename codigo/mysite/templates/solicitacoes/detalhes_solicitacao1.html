@@ -1,0 +1,54 @@
+<h1>Detalhes da Solicitação</h1>
+
+<p>Usuário: {{ solicitacao.usuario.nome }}</p>
+<p>Status: {{ solicitacao.get_status_display }}</p>
+<p>Questão 1: {{ solicitacao.questao1 }}</p>
+<p>Questão 2: {{ solicitacao.questao2 }}</p>
+<p>Questão 3: {{ solicitacao.questao3 }}</p>
+
+{% if solicitacao.status == 'caminho' %}
+    <p>Código de Rastreio: {{ solicitacao.codRastreio }}</p>
+    {% if solicitacao.usuario == request.user%}
+        <form action="{% url 'finalizar_entrega' solicitacao.id %}" method="POST">
+            {% csrf_token %}
+            <h2> Já recebeu a sua encomenda? </h2>
+            <input type="submit" value="Finalizar Entrega">
+        </form>
+    {% endif %}
+{% endif %}
+
+{% if request.user.is_staff %}
+    {% if solicitacao.status == 'aprovado'%}
+        <form action="{% url 'addCR' solicitacao.id %}" method="POST">
+            {% csrf_token %}
+            <label for="id_codRastreio">Código de Rastreio:</label>
+            <input type="text" id="id_codRastreio" name="codRastreio">
+            <br>
+            <br>
+            <input type="submit" value="Adicionar Código de Rastreio">
+        </form>
+    {% endif %}
+{% endif %}
+
+{% if solicitacao.comprovante %}
+  <h2>Comprovante:</h2>
+  <img src="{{ solicitacao.comprovante.url }}" alt="Comprovante">
+{% endif %}
+
+{% if solicitacao.peruca %}
+  <h2>Peruca Escolhida:</h2>
+  <img src="{{ solicitacao.peruca.foto.url }}" alt="Peruca">
+{% endif %}
+
+{% if request.user.is_staff %}
+    {% if solicitacao.status == 'analise'%}
+        <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Aprovar">
+        </form>
+        <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Rejeitar">
+        </form>
+    {% endif %}
+{% endif %}
