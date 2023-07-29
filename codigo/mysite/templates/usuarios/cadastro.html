@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/autenticacao.css' %}">
 </head>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
->>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
 
   <body>
     <div class="centered-div">
@@ -81,80 +77,6 @@
                       <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
                     </div>
                   </form>
-<<<<<<< HEAD
-=======
-<body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="registration-form">
-            <div class="titulo">
-                <h1> &zwnj; Cadastro &zwnj; </h1>
-                <br>
-                <br>
-            </div>
-          <form method="POST" action="{% url 'cadastro' %}">
-            {% csrf_token %}
-            <h4> &zwnj; Dados Pessoais &zwnj; </h4>
-            <br>
-            <br>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" class="form-control" placeholder="Digite seu username" required>
-            </div>
-            <div class="form-group">
-              <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail" required>
-            </div>
-            <div class="form-group">
-              <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome" required>
-            </div>
-            <div class="form-group">
-              <label for="sobrenome">Sobrenome</label>
-              <input type="text" id="sobrenome" name="sobrenome" class="form-control" placeholder="Digite seu sobrenome" required>
-            </div>
-            <div class="form-group">
-              <label for="telefone">Telefone</label>
-              <input type="text" id="telefone" name="telefone" class="form-control" placeholder="Digite seu telefone" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Senha</label>
-              <input type="password" id="password" name="password" class="form-control" placeholder="Digite sua senha" required>
-            </div>
-            <br>
-            <h4> &zwnj; Endereço &zwnj; </h4>
-            <br>
-            <br>
-            <div class="form-group">
-              <label for="rua">Rua</label>
-              <input type="text" id="rua" name="rua" class="form-control" placeholder="Digite o nome da sua rua" required>
-            </div>
-            <div class="form-group">
-              <label for="numero">Número</label>
-              <input type="number" id="numero" name="numero" class="form-control" placeholder="Digite o número da sua casa" required>
-            </div>
-            <div class="form-group">
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" name="bairro" class="form-control" placeholder="Digite o nome do seu bairro" required>
-              </div>
-            <div class="form-group">
-              <label for="cidade">Cidade</label>
-              <input type="text" id="cidade" name="cidade" class="form-control" placeholder="Digite o nome da sua cidade" required>
-            </div>
-            <div class="form-group">
-                <label for="estado">Estado</label>
-                <input type="text" id="estado" name="estado" class="form-control" placeholder="Digite o nome do seu Estado" required>
-              </div>
-            <br>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
-            </div>
-            <div class="form-group text-center">
-              <a href="{% url 'login' %}" class="forgot-password">Cadastre-se</a>
->>>>>>> Stashed changes
-=======
->>>>>>> 2a657132b73addc3c75cc1008b9a3a4f1b290c65
             </div>
         </div>
         </div>

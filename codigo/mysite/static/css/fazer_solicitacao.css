@@ -85,3 +85,18 @@ body{
   img{
     max-width: 100%;
   }
+
+  .btn-secondary {
+    background-color: #3365fc;
+    border-color: #3365fc;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #134df9;
+    border-color: #134df9;
+  }
+
+.correios-logo {
+  margin-right: 10px;
+  max-width: 30px; 
+}
