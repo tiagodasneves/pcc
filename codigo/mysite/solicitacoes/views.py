@@ -111,7 +111,12 @@ def aprovar_solicitacao(request, id):
 def rejeitar_solicitacao(request, id):
     if request.user.is_staff:
         solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
+        motivo_rejeicao = request.POST.get('motivo')
+        solicitacao.motivo_rejeicao = motivo_rejeicao
         solicitacao.status = 'rejeitado'
+        if solicitacao.peruca:
+            solicitacao.peruca.selecionada = False
+            solicitacao.peruca.save()
         solicitacao.peruca = None
         solicitacao.save()
         return redirect('listar_solicitacoes')

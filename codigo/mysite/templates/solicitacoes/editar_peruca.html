@@ -21,8 +21,8 @@
                                 <br> <h2> &zwnj; Editar peruca &zwnj; </h2> <br> <br> <br>
                             </div>
                             <div class="form-group">
-                                <label for="id_tamanho">Tamanho:</label>
-                                <select id="id_tamanho" name="tamanho">
+                                <label>Tamanho:</label>
+                                <select name="tamanho">
                                     <option value="curto" {% if peruca.tamanho == 'curto' %}selected{% endif %}>Peruca de tamanho curto</option>
                                     <option value="medio" {% if peruca.tamanho == 'medio' %}selected{% endif %}>Peruca de tamanho médio</option>
                                     <option value="longo" {% if peruca.tamanho == 'longo' %}selected{% endif %}>Peruca de tamanho longo</option>
@@ -30,8 +30,8 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="id_tipo">Tipo:</label>
-                                <select id="id_tipo" name="tipo">
+                                <label>Tipo:</label>
+                                <select name="tipo">
                                     <option value="liso" {% if peruca.tipo == 'liso' %}selected{% endif %}>Peruca de cabelo liso</option>
                                     <option value="ondulado" {% if peruca.tipo == 'ondulado' %}selected{% endif %}>Peruca de cabelo ondulado</option>
                                     <option value="cacheado" {% if peruca.tipo == 'cacheado' %}selected{% endif %}>Peruca de cabelo cacheado</option>
@@ -40,8 +40,8 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="id_cor">Cor:</label>
-                                <select id="id_cor" name="cor">
+                                <label>Cor:</label>
+                                <select name="cor">
                                     <option value="loiro" {% if peruca.cor == 'loiro' %}selected{% endif %}>Peruca de cabelo loiro</option>
                                     <option value="ruivo" {% if peruca.cor == 'ruivo' %}selected{% endif %}>Peruca de cabelo ruivo</option>
                                     <option value="preto" {% if peruca.cor == 'preto' %}selected{% endif %}>Peruca de cabelo preto</option>

@@ -6,7 +6,8 @@ from depoimentos.models import Depoimento
 
 def home(request):
     depoimentos = Depoimento.objects.all()
-    return render(request, 'core/index.html', {'depoimentos': depoimentos})
+    context = {'depoimentos': depoimentos}
+    return render(request, 'core/index.html', context)
 
 def cadastro(request):
     if request.method == 'POST':
@@ -71,7 +72,8 @@ def sair(request):
 def ler_usuarios(request):
     if request.user.is_staff:
         usuarios = Usuario.objects.all()
-        return render(request, 'usuarios/ler_usuarios.html', {"usuarios": usuarios})
+        context = {"usuarios": usuarios}
+        return render(request, 'usuarios/ler_usuarios.html', context)
     else:
         return redirect(home)
 
@@ -80,7 +82,8 @@ def editar_usuario(request, id):
     if request.user.is_staff:
         if request.method == 'GET':
             usuario = Usuario.objects.get(id=id)
-            return render(request, 'usuarios/editar_usuario.html', {"usuario": usuario})
+            context = {"usuario": usuario}
+            return render(request, 'usuarios/editar_usuario.html', context)
         else:
             nome = request.POST.get('nome')
             sobrenome = request.POST.get('sobrenome')
@@ -119,7 +122,8 @@ def deletar_usuario(request, id):
 def editar_perfil(request, id):
     if request.method == 'GET':
         usuario = Usuario.objects.get(id=id)
-        return render(request, 'usuarios/editar_perfil.html', {"usuario": usuario})
+        context = {"usuario": usuario}
+        return render(request, 'usuarios/editar_perfil.html', context)
     else:
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')

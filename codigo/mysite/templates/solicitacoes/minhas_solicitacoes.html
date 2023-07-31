@@ -30,7 +30,8 @@
             <p class="status-entregue"> Status: {{ solicitacao.get_status_display }}</p>
             {% endif %}
             <div class="d-flex justify-content-start">
-                <a href="{% url 'detalhes_solicitacao' solicitacao.id %}" class="btn btn-primary"> Mais detalhes </a>
+                <a href="{% url 'detalhes_solicitacao' solicitacao.id %}" class="btn btn-primary me-2"> Mais detalhes </a>
+                <a href="{% url 'deletar_solicitacao' solicitacao.id %}" class="btn btn-danger">Deletar</a>
             </div>  
         </div>
       {% empty %}

@@ -23,16 +23,16 @@
                         <p> Responda as perguntas abaixo para estar apto à receber uma peruca </p>
                     </div>
                     <div class="form-group">
-                        <label for="questao1">Qual é o seu objetivo ao fazer esse pedido?</label>
-                        <textarea id="questao1" name="questao1" class="form-control" rows="4" required></textarea>
+                        <label>Qual é o seu objetivo ao fazer esse pedido?</label>
+                        <textarea name="questao1" class="form-control" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="questao2">Você já realizou algum pedido de peruca anteriomente?</label>
-                        <textarea id="questao2" name="questao2" class="form-control" rows="4" required></textarea>
+                        <label>Você já realizou algum pedido de peruca anteriomente?</label>
+                        <textarea name="questao2" class="form-control" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="questao3">Qual o tipo de câncer que voce está passando no momento?</label>
-                        <textarea id="questao3" name="questao3" class="form-control" rows="4" required></textarea>
+                        <label>Qual o tipo de câncer que voce está passando no momento?</label>
+                        <textarea name="questao3" class="form-control" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
                         <strong>Comprovante:</strong> Adicione a foto do seu comprovante de quimioterapia, para confirmar o seu tratamento de câncer <br> <br>
@@ -64,24 +64,24 @@
                         <p> Esse será o endereço para onde será encaminhada a sua peruca </p>
                     </div>
                     <div class="form-group">
-                      <label for="rua">Rua</label>
-                      <input type="text" id="rua" name="rua" class="form-control" value="{{ request.user.rua }}" required>
+                      <label>Rua</label>
+                      <input type="text" name="rua" class="form-control" value="{{ request.user.rua }}" required>
                     </div>
                     <div class="form-group">
-                      <label for="numero">Número</label>
-                      <input type="number" id="numero" name="numero" class="form-control" value="{{ request.user.numero }}" required>
+                      <label>Número</label>
+                      <input type="number" name="numero" class="form-control" value="{{ request.user.numero }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro" class="form-control" value="{{ request.user.bairro }}" required>
+                        <label>Bairro</label>
+                        <input type="text" name="bairro" class="form-control" value="{{ request.user.bairro }}" required>
                       </div>
                     <div class="form-group">
-                      <label for="cidade">Cidade</label>
-                      <input type="text" id="cidade" name="cidade" class="form-control" value="{{ request.user.cidade }}" required>
+                      <label>Cidade</label>
+                      <input type="text" name="cidade" class="form-control" value="{{ request.user.cidade }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="estado">Estado</label>
-                        <input type="text" id="estado" name="estado" class="form-control" value="{{ request.user.estado }}" required>
+                        <label>Estado</label>
+                        <input type="text" name="estado" class="form-control" value="{{ request.user.estado }}" required>
                       </div>
                     <br>
                     <div class="form-group">

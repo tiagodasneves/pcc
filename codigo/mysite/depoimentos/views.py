@@ -4,7 +4,8 @@ from .models import Depoimento
 
 def home(request):
     depoimentos = Depoimento.objects.all()
-    return render(request, 'core/index.html', {'depoimentos': depoimentos})
+    context = {'depoimentos': depoimentos}
+    return render(request, 'core/index.html', context)
 
 @login_required
 def criar_depoimento(request):
