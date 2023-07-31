@@ -350,7 +350,7 @@
                 <article>
                   <p class="post-category">{{ depoimento.autor.nome }} {{ depoimento.autor.sobrenome }}</p>
                   <h2 class="title">{{ depoimento.conteudo }}</h2>
-                      {% if request.user == depoimento.autor %}
+                      {% if request.user == depoimento.autor or request.user.is_superuser%}
                         <a href="{% url 'deletar_depoimento' depoimento.id %}" class="btn btn-danger">Excluir</a>
                       {% endif %}
                 </article>

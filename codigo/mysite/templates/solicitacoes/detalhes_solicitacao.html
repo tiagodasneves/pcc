@@ -21,15 +21,15 @@
                         <h4> &zwnj; Respostas do Formulário &zwnj; </h4> <br> <br>
                     </div>
                     <div class="form-group">
-                        <label for="questao1">Qual é o seu objetivo ao fazer esse pedido?</label>
+                        <label>Qual é o seu objetivo ao fazer esse pedido?</label>
                         <p> {{ solicitacao.questao1 }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="questao2">Você já realizou algum pedido de peruca anteriomente?</label>
+                        <label>Você já realizou algum pedido de peruca anteriomente?</label>
                         <p> {{ solicitacao.questao2 }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="questao3">Qual o tipo de câncer que voce está passando no momento?</label>
+                        <label>Qual o tipo de câncer que voce está passando no momento?</label>
                         <p> {{ solicitacao.questao3 }}</p>
                     </div>
                     <div class="form-group">
@@ -52,23 +52,23 @@
                         <br> <h4> &zwnj; Endereço &zwnj; </h4> <br> <br>
                     </div>
                     <div class="form-group">
-                      <label for="rua">Rua</label>
+                      <label>Rua</label>
                       <p> {{ request.user.rua }} </p>
                     </div>
                     <div class="form-group">
-                      <label for="numero">Número</label>
+                      <label>Número</label>
                       <p> {{ request.user.numero }} </p>
                     </div>
                     <div class="form-group">
-                        <label for="bairro">Bairro</label>
+                        <label>Bairro</label>
                         <p> {{ request.user.bairro }} </p>
                       </div>
                     <div class="form-group">
-                      <label for="cidade">Cidade</label>
+                      <label>Cidade</label>
                       <p> {{ request.user.cidade }} </p>
                     </div>
                     <div class="form-group">
-                        <label for="estado">Estado</label>
+                        <label>Estado</label>
                         <p> {{ request.user.estado }} </p>
                       </div>
                     <br>
@@ -79,16 +79,17 @@
                 <div class="form-group">
                       {% if request.user.is_staff %}
                       {% if solicitacao.status == 'analise'%}
-                        <div class="d-flex justify-content-start">
+                        <p> Você pode tanto aprovar quanto rejeitar essa solicitação. Caso rejeite a solicitação, escreva abaixo o motivo. </p>
                           <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
                               {% csrf_token %}
-                              <input type="submit" class="btn btn-success me-2" value="Aprovar">
+                              <input type="submit" class="btn btn-success" value="Aprovar"> <br> <br>
                           </form>
                           <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
                               {% csrf_token %}
+                              <label for="id_motivo">Motivo da rejeição:</label>
+                              <textarea class="form-control" id="id_motivo" name="motivo" rows="4"></textarea> <br>
                               <input type="submit" class="btn btn-danger" value="Rejeitar">
                           </form>
-                        </div>
                       {% elif solicitacao.status == 'aprovado'%}
                         <form action="{% url 'addCR' solicitacao.id %}" method="POST">
                             {% csrf_token %}

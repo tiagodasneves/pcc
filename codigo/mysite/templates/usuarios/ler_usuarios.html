@@ -18,7 +18,7 @@
         <div>
             {% for usuario in usuarios %}
                 <div class="lista-usuarios">
-                    <strong> {{usuario.id}} - {{usuario.nome}} {{usuario.sobrenome}}</strong>
+                    <strong> {{usuario.nome}} {{usuario.sobrenome}}</strong>
                     <p> {{usuario.cidade}}, {{usuario.estado}} </p>
                     <div class="d-flex justify-content-start">
                         <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-primary me-2">Editar</a>

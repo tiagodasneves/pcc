@@ -6,15 +6,19 @@ from .models import Peruca, SolicitacaoPeruca
 def cadastrar_peruca(request):
     if request.user.is_staff:
         if request.method == 'POST':
-            tamanho = request.POST['tamanho']
-            tipo = request.POST['tipo']
-            cor = request.POST['cor']
-            foto = request.FILES['foto']
-            peruca = Peruca(tamanho=tamanho, tipo=tipo, cor=cor, foto=foto, selecionada=False)
+            tamanho = request.POST.get('tamanho')
+            tipo = request.POST.get('tipo')
+            cor = request.POST.get('cor')
+            foto = request.FILES.get('foto')
+            peruca = Peruca(tamanho=tamanho, 
+                            tipo=tipo, 
+                            cor=cor, 
+                            foto=foto, 
+                            selecionada=False)
             peruca.save()
             return redirect('listar_perucas')
         else:
-            return render(request, 'solicitacoes/perucas.html')
+            return redirect('listar_perucas')
     else:
         return redirect('minhas_solicitacoes')
 
@@ -28,13 +32,13 @@ def listar_perucas(request):
         return redirect('minhas_solicitacoes')
 
 @login_required
-def editar_peruca(request, pk):
+def editar_peruca(request, id):
     if request.user.is_staff:
-        peruca = get_object_or_404(Peruca, pk=pk)
+        peruca = get_object_or_404(Peruca, id=id)
         if request.method == 'POST':
-            peruca.tamanho = request.POST['tamanho']
-            peruca.tipo = request.POST['tipo']
-            peruca.cor = request.POST['cor']
+            peruca.tamanho = request.POST.get('tamanho')
+            peruca.tipo = request.POST.get('tipo')
+            peruca.cor = request.POST.get('cor')
             peruca.save()
             return redirect('listar_perucas')
         else:
@@ -44,9 +48,9 @@ def editar_peruca(request, pk):
         return redirect('minhas_solicitacoes')
 
 @login_required
-def excluir_peruca(request, pk):
+def excluir_peruca(request, id):
     if request.user.is_staff:
-        peruca = get_object_or_404(Peruca, pk=pk)
+        peruca = get_object_or_404(Peruca, id=id)
         if request.method == 'POST':
             peruca.delete()
             return redirect('listar_perucas')
@@ -60,11 +64,11 @@ def excluir_peruca(request, pk):
 def fazer_solicitacao(request):
     if request.method == 'POST':
         solicitacao = SolicitacaoPeruca()
-        solicitacao.peruca_id = request.POST['peruca']
+        solicitacao.peruca_id = request.POST.get('peruca')
         solicitacao.usuario_id = request.user.id
-        solicitacao.questao1 = request.POST['questao1']
-        solicitacao.questao2 = request.POST['questao2']
-        solicitacao.questao3 = request.POST['questao3']
+        solicitacao.questao1 = request.POST.get('questao1')
+        solicitacao.questao2 = request.POST.get('questao2')
+        solicitacao.questao3 = request.POST.get('questao3')
         solicitacao.comprovante = request.FILES.get('comprovante')
         solicitacao.status = 'analise'
         solicitacao.save()
@@ -88,15 +92,15 @@ def listar_solicitacoes(request):
         return redirect('minhas_solicitacoes')
 
 @login_required
-def detalhes_solicitacao(request, solicitacao_id):
-        solicitacao = get_object_or_404(SolicitacaoPeruca, id=solicitacao_id)
+def detalhes_solicitacao(request, id):
+        solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
         context = {'solicitacao': solicitacao}
         return render(request, 'solicitacoes/detalhes_solicitacao.html', context)
 
 @login_required
-def aprovar_solicitacao(request, solicitacao_id):
+def aprovar_solicitacao(request, id):
     if request.user.is_staff:
-        solicitacao = get_object_or_404(SolicitacaoPeruca, id=solicitacao_id)
+        solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
         solicitacao.status = 'aprovado'
         solicitacao.save()
         return redirect('listar_solicitacoes')
@@ -104,23 +108,20 @@ def aprovar_solicitacao(request, solicitacao_id):
         return redirect('minhas_solicitacoes')
 
 @login_required
-def rejeitar_solicitacao(request, solicitacao_id):
+def rejeitar_solicitacao(request, id):
     if request.user.is_staff:
-        solicitacao = get_object_or_404(SolicitacaoPeruca, id=solicitacao_id)
+        solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
         solicitacao.status = 'rejeitado'
         solicitacao.peruca = None
         solicitacao.save()
-        if solicitacao.peruca:
-            solicitacao.peruca.selecionada = False
-            solicitacao.peruca.save()
         return redirect('listar_solicitacoes')
     else:
         return redirect('minhas_solicitacoes')
 
 @login_required
-def addCR(request, solicitacao_id):
+def addCR(request, id):
     if request.user.is_staff:
-            solicitacao = get_object_or_404(SolicitacaoPeruca, id=solicitacao_id)
+            solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
             solicitacao.status = 'caminho'
             solicitacao.codRastreio = request.POST['codRastreio']
             solicitacao.save()
@@ -134,8 +135,18 @@ def minhas_solicitacoes(request):
     return render(request, 'solicitacoes/minhas_solicitacoes.html', {'solicitacoes': solicitacoes})
 
 @login_required
-def finalizar_entrega(request, solicitacao_id):
-    solicitacao = get_object_or_404(SolicitacaoPeruca, id=solicitacao_id)
+def finalizar_entrega(request, id):
+    solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
     solicitacao.status = 'entregue'
     solicitacao.save()
     return redirect('minhas_solicitacoes')
+
+@login_required
+def deletar_solicitacao(request, id):
+    solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
+    if request.user == solicitacao.usuario or request.user.is_superuser:
+        solicitacao.delete()
+        return redirect('listar_solicitacoes')
+    else:
+        return redirect('minhas_solicitacoes')
+

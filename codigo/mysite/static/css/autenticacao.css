@@ -50,3 +50,7 @@ label {
     border-bottom: 4px solid #f85a40;
     display: inline;
   }
+
+  .mensagem_erro p {
+    color: red;
+  }

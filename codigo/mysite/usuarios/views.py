@@ -10,36 +10,43 @@ def home(request):
 
 def cadastro(request):
     if request.method == 'POST':
-            username = request.POST.get('username')
-            email = request.POST.get('email')
-            nome = request.POST.get('nome')
-            sobrenome = request.POST.get('sobrenome')
-            telefone = request.POST.get('telefone')
-            password = request.POST.get('password')
-            rua = request.POST.get('rua')
-            numero = request.POST.get('numero')
-            bairro = request.POST.get('bairro')
-            cidade = request.POST.get('cidade')
-            estado = request.POST.get('estado')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
 
-            novoUsuario = Usuario.objects.create_user(username=username, 
-                                                      email=email, 
-                                                      nome=nome,
-                                                      sobrenome=sobrenome, 
-                                                      telefone=telefone, 
-                                                      password=password,
-                                                      rua=rua,
-                                                      numero=numero,
-                                                      bairro=bairro,
-                                                      cidade=cidade,
-                                                      estado=estado)
-            novoUsuario.save()
+        if Usuario.objects.filter(username=username).exists():
+            return render(request, 'usuarios/cadastro.html', {'msg_usuario': 'Este username já está em uso'})
+        
+        if Usuario.objects.filter(email=email).exists():
+            return render(request, 'usuarios/cadastro.html', {'msg_email': 'Este email já está cadastrado'})
 
-            return render(request, 'usuarios/login.html')
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
+        telefone = request.POST.get('telefone')
+        password = request.POST.get('password')
+        rua = request.POST.get('rua')
+        numero = request.POST.get('numero')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        estado = request.POST.get('estado')
+
+        novoUsuario = Usuario.objects.create_user(username=username, 
+                                                  email=email, 
+                                                  nome=nome,
+                                                  sobrenome=sobrenome, 
+                                                  telefone=telefone, 
+                                                  password=password,
+                                                  rua=rua,
+                                                  numero=numero,
+                                                  bairro=bairro,
+                                                  cidade=cidade,
+                                                  estado=estado)
+        novoUsuario.save()
+
+        return render(request, 'usuarios/login.html')
 
     else:
-        return render (request, 'usuarios/cadastro.html')
-
+        return render(request, 'usuarios/cadastro.html')
+    
 def user_login (request):
     if request.method == "POST":
         username = request.POST.get('username')
