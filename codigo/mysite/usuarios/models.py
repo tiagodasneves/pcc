@@ -10,6 +10,7 @@ class Usuario(AbstractUser):
     bairro=models.CharField(max_length=100, null=True)
     cidade = models.CharField(max_length=100, null=True)
     estado = models.CharField(max_length=100, null=True)
+    cep = models.CharField(max_length=10, null=True)
 
     groups = models.ManyToManyField(Group, related_name='usuarios')
     user_permissions = models.ManyToManyField(Permission, related_name='usuarios')

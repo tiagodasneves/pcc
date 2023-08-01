@@ -15,20 +15,27 @@ def cadastro(request):
         email = request.POST.get('email')
 
         if Usuario.objects.filter(username=username).exists():
-            return render(request, 'usuarios/cadastro.html', {'msg_usuario': 'Este username já está em uso'})
+            return render(request, 'usuarios/cadastro.html', {'msg_username': 'Este username já está em uso!'})
         
         if Usuario.objects.filter(email=email).exists():
-            return render(request, 'usuarios/cadastro.html', {'msg_email': 'Este email já está cadastrado'})
+            return render(request, 'usuarios/cadastro.html', {'msg_email': 'Este email já está cadastrado!'})
+        
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
+
+        if password != password2:
+            return render(request, 'usuarios/cadastro.html', {'msg_password': 'As senhas não são iguais!'})
+
 
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
         telefone = request.POST.get('telefone')
-        password = request.POST.get('password')
         rua = request.POST.get('rua')
         numero = request.POST.get('numero')
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade')
         estado = request.POST.get('estado')
+        cep = request.POST.get('cep')
 
         novoUsuario = Usuario.objects.create_user(username=username, 
                                                   email=email, 
@@ -40,7 +47,8 @@ def cadastro(request):
                                                   numero=numero,
                                                   bairro=bairro,
                                                   cidade=cidade,
-                                                  estado=estado)
+                                                  estado=estado,
+                                                  cep = cep)
         novoUsuario.save()
 
         return render(request, 'usuarios/login.html')
