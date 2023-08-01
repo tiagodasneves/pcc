@@ -48,7 +48,7 @@ def cadastro(request):
     else:
         return render(request, 'usuarios/cadastro.html')
     
-def user_login (request):
+def entrar (request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')

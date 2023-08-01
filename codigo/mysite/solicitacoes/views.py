@@ -48,15 +48,12 @@ def editar_peruca(request, id):
         return redirect('minhas_solicitacoes')
 
 @login_required
-def excluir_peruca(request, id):
+def deletar_peruca(request, id):
     if request.user.is_staff:
         peruca = get_object_or_404(Peruca, id=id)
         if request.method == 'POST':
             peruca.delete()
             return redirect('listar_perucas')
-        else:
-            context = {'peruca': peruca}
-            return render(request, 'solicitacoes/perucas.html', context)
     else:
         return redirect('minhas_solicitacoes')
 
@@ -114,9 +111,8 @@ def rejeitar_solicitacao(request, id):
         motivo_rejeicao = request.POST.get('motivo')
         solicitacao.motivo_rejeicao = motivo_rejeicao
         solicitacao.status = 'rejeitado'
-        if solicitacao.peruca:
-            solicitacao.peruca.selecionada = False
-            solicitacao.peruca.save()
+        solicitacao.peruca.selecionada = False
+        solicitacao.peruca.save()
         solicitacao.peruca = None
         solicitacao.save()
         return redirect('listar_solicitacoes')
@@ -128,7 +124,7 @@ def addCR(request, id):
     if request.user.is_staff:
             solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
             solicitacao.status = 'caminho'
-            solicitacao.codRastreio = request.POST['codRastreio']
+            solicitacao.codRastreio = request.POST.get('codRastreio')
             solicitacao.save()
             return redirect('listar_solicitacoes')
     else:
