@@ -40,7 +40,6 @@ class SolicitacaoPeruca(models.Model):
     questao1 = models.TextField(null=True, blank=False)
     questao2 = models.TextField(null=True, blank=False)
     questao3 = models.TextField(null=True, blank=False)
-    motivo_rejeicao = models.TextField(null=True, blank=False)
-    comprovante = models.ImageField(upload_to='imagens/comprovantes', null=True, blank=False)
+    motivo_rejeicao = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=50, choices=statusOptions)
 

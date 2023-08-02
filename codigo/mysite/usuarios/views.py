@@ -101,6 +101,7 @@ def editar_usuario(request, id):
             bairro = request.POST.get('bairro')
             cidade = request.POST.get('cidade')
             estado = request.POST.get('estado')
+            cep = request.POST.get('cep')
 
             usuario = Usuario.objects.get(id=id)
             usuario.nome = nome
@@ -111,6 +112,7 @@ def editar_usuario(request, id):
             usuario.bairro = bairro 
             usuario.cidade = cidade 
             usuario.estado = estado
+            usuario.cep = cep
             usuario.save()
 
             return redirect(ler_usuarios)
@@ -141,6 +143,7 @@ def editar_perfil(request, id):
         bairro = request.POST.get('bairro')
         cidade = request.POST.get('cidade')
         estado = request.POST.get('estado')
+        cep = request.POST.get('cep')
 
         usuario = Usuario.objects.get(id=id)
         usuario.nome = nome
@@ -151,6 +154,7 @@ def editar_perfil(request, id):
         usuario.bairro = bairro 
         usuario.cidade = cidade 
         usuario.estado = estado
+        usuario.cep = cep
         usuario.save()
 
         return redirect(home)

@@ -18,7 +18,7 @@ def cadastrar_peruca(request):
             peruca.save()
             return redirect('listar_perucas')
         else:
-            return redirect('listar_perucas')
+            return render(request, 'solicitacoes/cadastrar_perucas.html')
     else:
         return redirect('minhas_solicitacoes')
 
@@ -51,9 +51,8 @@ def editar_peruca(request, id):
 def deletar_peruca(request, id):
     if request.user.is_staff:
         peruca = get_object_or_404(Peruca, id=id)
-        if request.method == 'POST':
-            peruca.delete()
-            return redirect('listar_perucas')
+        peruca.delete()
+        return redirect('listar_perucas')
     else:
         return redirect('minhas_solicitacoes')
 
@@ -66,7 +65,6 @@ def fazer_solicitacao(request):
         solicitacao.questao1 = request.POST.get('questao1')
         solicitacao.questao2 = request.POST.get('questao2')
         solicitacao.questao3 = request.POST.get('questao3')
-        solicitacao.comprovante = request.FILES.get('comprovante')
         solicitacao.status = 'analise'
         solicitacao.save()
         peruca_id = request.POST.get('peruca')
@@ -122,11 +120,15 @@ def rejeitar_solicitacao(request, id):
 @login_required
 def addCR(request, id):
     if request.user.is_staff:
+        if request.method == "POST":
             solicitacao = get_object_or_404(SolicitacaoPeruca, id=id)
             solicitacao.status = 'caminho'
-            solicitacao.codRastreio = request.POST.get('codRastreio')
+            codRastreio = request.POST.get('codRastreio')
+            solicitacao.codRastreio = codRastreio
             solicitacao.save()
             return redirect('listar_solicitacoes')
+        else:
+            return redirect('detalhes_solicitacao')
     else:
         return redirect('minhas_solicitacoes')
 

@@ -1,0 +1,97 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/fazer_solicitacao.css' %}">
+</head>
+
+  <body>
+    <div class="centered-div">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="registration-form">
+                <div class="titulo">
+                    <br> <h1> &zwnj; Solicitação de Perucas &zwnj; </h1> <br> <br>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="{% url 'fazer_solicitacao' %}"> {% csrf_token %}
+                    <div>
+                        <h4> &zwnj; Formulário &zwnj; </h4> <br> <br>
+                        <p> Responda as perguntas abaixo para estar apto à receber uma peruca </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Qual é o seu objetivo ao fazer esse pedido?</label>
+                        <textarea name="questao1" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Você já realizou algum pedido de peruca anteriomente?</label>
+                        <textarea name="questao2" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Qual o tipo de câncer que voce está passando no momento?</label>
+                        <textarea name="questao3" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <strong>Comprovante:</strong> Adicione a foto do seu comprovante de quimioterapia, para confirmar o seu tratamento de câncer <br> <br>
+                        <input type="file" id="id_comprovante" name="comprovante" required>
+                    </div>
+                    <div>
+                        <br> <h4> &zwnj; Perucas &zwnj; </h4> <br> <br>
+                        <p> Escolha, dentre as perucas abaixo, aquela que você achar que combine mais com você! </p>
+                    </div>
+                    <div class="perucas-container">
+                        {% for peruca in perucas_disponiveis %}
+                          <div class="peruca-item">
+                            <input type="radio" id="peruca_{{ peruca.id }}" name="peruca" value="{{ peruca.id }}" required>
+                            <label for="peruca_{{ peruca.id }}">
+                                <div class="dentro_item">
+                                    <img src="{{ peruca.foto.url }}" alt="Foto da Peruca" class="peruca-img">
+                                    <p>
+                                        <strong> Tamanho: </strong> {{ peruca.tamanho }} <br>
+                                        <strong> Tipo: </strong> {{ peruca.tipo }} <br>
+                                        <strong> Cor: </strong> {{ peruca.cor }} <br>   
+                                    </p>
+                                </div>
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    <div>
+                        <br> <h4> &zwnj; Seu endereço &zwnj; </h4> <br> <br>
+                        <p> Esse será o endereço para onde será encaminhada a sua peruca </p>
+                    </div>
+                    <div class="form-group">
+                      <label>Rua</label>
+                      <input type="text" name="rua" class="form-control" value="{{ request.user.rua }}" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Número</label>
+                      <input type="number" name="numero" class="form-control" value="{{ request.user.numero }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" name="bairro" class="form-control" value="{{ request.user.bairro }}" required>
+                      </div>
+                    <div class="form-group">
+                      <label>Cidade</label>
+                      <input type="text" name="cidade" class="form-control" value="{{ request.user.cidade }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" name="estado" class="form-control" value="{{ request.user.estado }}" required>
+                      </div>
+                    <br>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block"> Enviar solicitação </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}

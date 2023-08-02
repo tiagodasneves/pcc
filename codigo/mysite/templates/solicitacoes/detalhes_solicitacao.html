@@ -3,138 +3,158 @@
 {% block content %}
 
 {% load static %}
+ <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/fazer_solicitacao.css' %}">
-</head>
+        <div class="row gx-lg-0 gy-4">
 
-  <body>
-    <div class="centered-div">
-        <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="registration-form">
-                <div class="titulo">
-                    <br> <h1> &zwnj; Solicitação de {{solicitacao.usuario.nome}} {{solicitacao.usuario.sobrenome}} &zwnj; </h1> <br> <br> <br>
-                </div>
-                    <div>
-                        <h4> &zwnj; Respostas do Formulário &zwnj; </h4> <br> <br>
+          <div class="col-lg-12">
+            <div class="django-form">
+                    <div class="section-header">
+                        <h2>Solicitação de Peruca</h2>
                     </div>
-                    <div class="form-group">
-                        <label>Qual é o seu objetivo ao fazer esse pedido?</label>
-                        <p> {{ solicitacao.questao1 }}</p>
+                        <div class="formulario-preenchido">
+                            <div class="form-header">
+                                <br> <h3>Formulário preenchido</h3>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label>Qual é o seu objetivo ao fazer esse pedido?</label> 
+                                <p> {{ solicitacao.questao1 }}</p>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label>Você já realizou algum pedido de peruca anteriomente?</label> 
+                                <p> {{ solicitacao.questao2 }}</p>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label>Qual o tipo de câncer que você está passando no momento?</label> 
+                                <p> {{ solicitacao.questao3 }}</p>
+                            </div>
+                        </div>
+
+                        {% if solicitacao.status != 'rejeitado' %}
+                            <div class="form-header">
+                                <h3>Peruca Escolhida</h3>
+                            </div>
+                            <section id="team" class="team">
+                                <div class="container" data-aos="fade-up">
+                                    <div class="peruca-escolhida">      
+
+                                        <div class="row gy-4">
+
+                                            {% if solicitacao.peruca %}
+
+                                                <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                                                <div class="member">
+                                                    <img src="{{ solicitacao.peruca.foto.url }}" class="img-fluid" alt="Peruca">
+                                                        <h4> Tamanho: {{ solicitacao.peruca.tamanho }} <br> </h4>
+                                                        <h4> Tipo: {{ solicitacao.peruca.tipo }} <br> </h4>
+                                                        <h4> Cor: {{ solicitacao.peruca.cor }} <br> </h4>
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                            </section>
+                        {% endif %}
+
+                <br>
+                <div class="endereco">
+                    <div class="form-header">
+                        <h3>Endereço</h3>
+                        <p> Esse será o endereço para onde será encaminhada a sua peruca </p> <br>
                     </div>
-                    <div class="form-group">
-                        <label>Você já realizou algum pedido de peruca anteriomente?</label>
-                        <p> {{ solicitacao.questao2 }}</p>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" name="rua" value="{{ request.user.rua }}" required>
                     </div>
-                    <div class="form-group">
-                        <label>Qual o tipo de câncer que voce está passando no momento?</label>
-                        <p> {{ solicitacao.questao3 }}</p>
+                        <div class="col-md-2 form-group mt-3 mt-md-0">
+                        <input type="number" class="form-control" name="numero" value="{{ request.user.numero }}" required>
                     </div>
-                    <div class="form-group">
-                        <strong>Foto do comprovante de quimioterapia:</strong> <br> <br>
-                        <div class="peruca-item">
-                            <img src="{{ solicitacao.comprovante.url }}" alt="Comprovante">
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <input type="text" class="form-control" name="bairro" value="{{ request.user.bairro }}" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" name="cidade" value="{{ request.user.cidade }}" required>
+                        </div>
+                        <div class="col-md-4 form-group mt-3 mt-md-0">
+                            <input type="text" class="form-control" name="estado" value="{{ request.user.estado }}" required>
+                        </div>
+                        <div class="col-md-2 form-group mt-3 mt-md-0">
+                            <input type="text" class="form-control" name="cep" value="{{ request.user.cep }}" required>
                         </div>
                     </div>
-                    {% if solicitacao.peruca %}
-                    <div>
-                        <br> <h4> &zwnj; Peruca escolhida &zwnj; </h4> <br> <br>
-                    </div>
-                    <div class="perucas-container">
-                          <div class="peruca-item">
-                            <img src="{{ solicitacao.peruca.foto.url }}" alt="Peruca">
-                          </div>
-                      </div>
-                    {% endif %}
-                    <div>
-                        <br> <h4> &zwnj; Endereço &zwnj; </h4> <br> <br>
-                    </div>
-                    <div class="form-group">
-                      <label>Rua</label>
-                      <p> {{ request.user.rua }} </p>
-                    </div>
-                    <div class="form-group">
-                      <label>Número</label>
-                      <p> {{ request.user.numero }} </p>
-                    </div>
-                    <div class="form-group">
-                        <label>Bairro</label>
-                        <p> {{ request.user.bairro }} </p>
-                      </div>
-                    <div class="form-group">
-                      <label>Cidade</label>
-                      <p> {{ request.user.cidade }} </p>
-                    </div>
-                    <div class="form-group">
-                        <label>Estado</label>
-                        <p> {{ request.user.estado }} </p>
-                      </div>
-                    <br>
+                </div>
 
-                    <div>
-                      <h4> &zwnj; Pedido {{ solicitacao.get_status_display }} &zwnj; </h4> <br> <br>
+                <div class="pedido">
+                    <div class="form-header">
+                        <br> <br> <h3>Pedido {{ solicitacao.get_status_display }} </h3>
                     </div>
-                <div class="form-group">
-                      {% if request.user.is_staff %}
-                        {% if solicitacao.status == 'analise'%}
-                          <p> Você pode tanto aprovar quanto rejeitar essa solicitação. Caso rejeite a solicitação, escreva abaixo o motivo. </p>
-                            <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" class="btn btn-success" value="Aprovar"> <br> <br>
-                            </form>
-                            <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
+                    <div class="form-group">
+                        {% if request.user.is_staff %}
+                          {% if solicitacao.status == 'analise'%}
+                            <p> Você pode tanto aprovar quanto rejeitar essa solicitação. Caso rejeite a solicitação, escreva abaixo o motivo. </p>
+                              <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
                                 {% csrf_token %}
                                 <label>Motivo da rejeição:</label>
                                 <textarea class="form-control" name="motivo" rows="4"></textarea> <br>
                                 <input type="submit" class="btn btn-danger" value="Rejeitar">
+                              </form> <br>
+                              <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
+                                  {% csrf_token %}
+                                  <input type="submit" class="btn btn-success" value="Aprovar"> <br> <br>
+                              </form>
+                          {% elif solicitacao.status == 'rejeitado'%}
+                              <label>Motivo da rejeição:</label>
+                              <p> {{ solicitacao.motivo_rejeicao }} </p>
+                          {% elif solicitacao.status == 'aprovado'%}
+                            <form action="{% url 'addCR' solicitacao.id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                  <div class="col-md-5">
+                                    <input type="text" name="codRastreio" class="form-control" placeholder="Código de Rastreio" required>
+                                  </div>
+                                  <div class="col-md-7">
+                                  <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-primary ms-3">
+                                    <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
+                                    <strong> Correios </strong>
+                                  </a>
+                                  </div>
+                                </div> <br> <br>
+                                <button type="submit"> Adicionar Código de Rastreio </button>
                             </form>
-                        {% elif solicitacao.status == 'rejeitado'%}
+                          {% endif %}
+                        {% elif solicitacao.usuario == request.user %}
+                          {% if solicitacao.status == 'rejeitado'%}
+                            <p> Seu pedido de solicitação foi recusado. Você pode conferir abaixo o motivo pelo qual seu pedido foi rejeitado. Mas não se preocupe, você pode fazer novas solicitações futuramente. </p>
                             <label>Motivo da rejeição:</label>
-                            <p> {{ solicitacao.motivo_rejeicao }} </p>
-                        {% elif solicitacao.status == 'aprovado'%}
-                          <form action="{% url 'addCR' solicitacao.id %}" method="POST">
-                              {% csrf_token %}
-                                <label for="id_codRastreio">Código de Rastreio:</label>
-                                <input type="text" name="codRastreio" required>
-                                <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-secondary ms-3">
-                                  <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
-                                  <strong> Correios </strong>
-                                </a>
-                              <br>
-                              <br>
-                              <input type="submit" class="btn btn-primary btn-block" value="Adicionar Código de Rastreio">
-                          </form>
+                              <p> {{ solicitacao.motivo_rejeicao }} </p>
+                          {% elif solicitacao.status == 'aprovado'%}
+                            <p> Seu pedido de solicitação foi aprovado! Agora a instituição irá mandar seu pedido aos Correios e adicionará o Código de Rastreio para que você acompanhe a sua encomenda. </p>
+                          {% elif solicitacao.status == 'caminho' %}
+                            <p> Sua encomenda já está a caminho! Você pode acompanhar a sua encomenda pelo Código de Rastreio abaixo. Caso a encomenda já tenha chegado à sua casa, clique em Finalizar Entrega! </p>
+                              <p> <strong> Código de Rastreio: </strong> {{ solicitacao.codRastreio }}</p>
+                              <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-primary">
+                                <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
+                                <strong> Correios </strong>
+                              </a> <br> <br>
+                            <form action="{% url 'finalizar_entrega' solicitacao.id %}" method="POST"> {% csrf_token %}
+                              <label> Já recebeu a sua encomenda? </label> <br>
+                              <button type="submit"> Finalizar Entrega</button>
+                            </form>
+                          {% endif %}
                         {% endif %}
-                      {% elif solicitacao.usuario == request.user %}
-                        {% if solicitacao.status == 'rejeitado'%}
-                          <p> Seu pedido de solicitação foi recusado. Você pode conferir abaixo o motivo pelo qual seu pedido foi rejeitado. Mas não se preocupe, você pode fazer novas solicitações futuramente. </p>
-                          <label>Motivo da rejeição:</label>
-                            <p> {{ solicitacao.motivo_rejeicao }} </p>
-                        {% elif solicitacao.status == 'aprovado'%}
-                          <p> Seu pedido de solicitação foi aprovado! Agora a instituição irá mandar seu pedido aos Correios e adicionará o Código de Rastreio para que você acompanhe a sua encomenda. </p>
-                        {% elif solicitacao.status == 'caminho' %}
-                          <p> Sua encomenda já está a caminho! Você pode acompanhar a sua encomenda pelo Código de Rastreio abaixo. Caso a encomenda já tenha chegado à sua casa, clique em Finalizar Entrega </p>
-                          <div class="d-flex justify-content-start">
-                            <p> <strong> Código de Rastreio: </strong> {{ solicitacao.codRastreio }}</p>
-                            <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-secondary ms-4">
-                              <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
-                              <strong> Correios </strong>
-                            </a>
-                          </div>
-                        <br>
-                          <form action="{% url 'finalizar_entrega' solicitacao.id %}" method="POST"> {% csrf_token %}
-                            <label> Já recebeu a sua encomenda? </label>
-                            <input type="submit" class="btn btn-primary btn-block" value="Finalizar Entrega">
-                          </form>
-                        {% endif %}
-                      {% endif %}
+                  </div>
                 </div>
+              </div>        
             </div>
+          </div><!-- End Contact Form -->
+
         </div>
         </div>
-        </div>
-    </div>
-    </body>
-{% endblock %}
+    </section><!-- End Contact Section -->
+
+    {% endblock %}

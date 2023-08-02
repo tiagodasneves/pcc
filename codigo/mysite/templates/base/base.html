@@ -41,7 +41,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="{% url 'home' %}" class="logo d-flex align-items-center">
         <img src="{% static 'img/logo_white.png' %}">
-        <h1 style="border-bottom: 3px solid #db4d35;">Fios de Esperança</h1>
+        <h1>Fios de Esperança</h1>
       </a>
       <nav id="navbar" class="navbar">
         <ul>
@@ -58,6 +58,7 @@
             <ul>
               <li><a href="{% url 'ler_usuarios'%}">Lista de Usuários</a></li>
               <li><a href="{% url 'listar_perucas' %}">Banco de Perucas</a></li>
+              <li><a href="{% url 'cadastrar_peruca' %}">Cadastro de Perucas</a></li>
               <li><a href="{% url 'listar_solicitacoes' %}">Lista de Solicitações</a></li>
             </ul>
           </li>       

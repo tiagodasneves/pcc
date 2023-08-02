@@ -1,0 +1,134 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/fazer_solicitacao.css' %}">
+</head>
+
+  <body>
+    <div class="centered-div">
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="registration-form">
+                <div class="titulo">
+                    <br> <h1> &zwnj; Solicitação de {{solicitacao.usuario.nome}} {{solicitacao.usuario.sobrenome}} &zwnj; </h1> <br> <br> <br>
+                </div>
+                    <div>
+                        <h4> &zwnj; Respostas do Formulário &zwnj; </h4> <br> <br>
+                    </div>
+                    <div class="form-group">
+                        <label>Qual é o seu objetivo ao fazer esse pedido?</label>
+                        <p> {{ solicitacao.questao1 }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Você já realizou algum pedido de peruca anteriomente?</label>
+                        <p> {{ solicitacao.questao2 }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Qual o tipo de câncer que voce está passando no momento?</label>
+                        <p> {{ solicitacao.questao3 }}</p>
+                    </div>
+                    {% if solicitacao.peruca %}
+                    <div>
+                        <br> <h4> &zwnj; Peruca escolhida &zwnj; </h4> <br> <br>
+                    </div>
+                    <div class="perucas-container">
+                          <div class="peruca-item">
+                            <img src="{{ solicitacao.peruca.foto.url }}" class="img-fluid "alt="Peruca">
+                          </div>
+                      </div>
+                    {% endif %}
+                    <div>
+                        <br> <h4> &zwnj; Endereço &zwnj; </h4> <br> <br>
+                    </div>
+                    <div class="form-group">
+                      <label>Rua</label>
+                      <p> {{ request.user.rua }} </p>
+                    </div>
+                    <div class="form-group">
+                      <label>Número</label>
+                      <p> {{ request.user.numero }} </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <p> {{ request.user.bairro }} </p>
+                      </div>
+                    <div class="form-group">
+                      <label>Cidade</label>
+                      <p> {{ request.user.cidade }} </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <p> {{ request.user.estado }} </p>
+                      </div>
+                    <br>
+
+                    <div>
+                      <h4> &zwnj; Pedido {{ solicitacao.get_status_display }} &zwnj; </h4> <br> <br>
+                    </div>
+                <div class="form-group">
+                      {% if request.user.is_staff %}
+                        {% if solicitacao.status == 'analise'%}
+                          <p> Você pode tanto aprovar quanto rejeitar essa solicitação. Caso rejeite a solicitação, escreva abaixo o motivo. </p>
+                            <form action="{% url 'aprovar_solicitacao' solicitacao.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-success" value="Aprovar"> <br> <br>
+                            </form>
+                            <form action="{% url 'rejeitar_solicitacao' solicitacao.id %}" method="POST">
+                                {% csrf_token %}
+                                <label>Motivo da rejeição:</label>
+                                <textarea class="form-control" name="motivo" rows="4"></textarea> <br>
+                                <input type="submit" class="btn btn-danger" value="Rejeitar">
+                            </form>
+                        {% elif solicitacao.status == 'rejeitado'%}
+                            <label>Motivo da rejeição:</label>
+                            <p> {{ solicitacao.motivo_rejeicao }} </p>
+                        {% elif solicitacao.status == 'aprovado'%}
+                          <form action="{% url 'addCR' solicitacao.id %}" method="POST">
+                              {% csrf_token %}
+                                <label for="id_codRastreio">Código de Rastreio:</label>
+                                <input type="text" name="codRastreio" required>
+                                <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-secondary ms-3">
+                                  <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
+                                  <strong> Correios </strong>
+                                </a>
+                              <br>
+                              <br>
+                              <input type="submit" class="btn btn-primary btn-block" value="Adicionar Código de Rastreio">
+                          </form>
+                        {% endif %}
+                      {% elif solicitacao.usuario == request.user %}
+                        {% if solicitacao.status == 'rejeitado'%}
+                          <p> Seu pedido de solicitação foi recusado. Você pode conferir abaixo o motivo pelo qual seu pedido foi rejeitado. Mas não se preocupe, você pode fazer novas solicitações futuramente. </p>
+                          <label>Motivo da rejeição:</label>
+                            <p> {{ solicitacao.motivo_rejeicao }} </p>
+                        {% elif solicitacao.status == 'aprovado'%}
+                          <p> Seu pedido de solicitação foi aprovado! Agora a instituição irá mandar seu pedido aos Correios e adicionará o Código de Rastreio para que você acompanhe a sua encomenda. </p>
+                        {% elif solicitacao.status == 'caminho' %}
+                          <p> Sua encomenda já está a caminho! Você pode acompanhar a sua encomenda pelo Código de Rastreio abaixo. Caso a encomenda já tenha chegado à sua casa, clique em Finalizar Entrega </p>
+                          <div class="d-flex justify-content-start">
+                            <p> <strong> Código de Rastreio: </strong> {{ solicitacao.codRastreio }}</p>
+                            <a type="button" href="https://rastreamento.correios.com.br/app/index.php" class="btn btn-secondary ms-4">
+                              <img src="{% static 'img/logo_correios.png'%}" alt="Logo dos Correios" class="correios-logo">
+                              <strong> Correios </strong>
+                            </a>
+                          </div>
+                        <br>
+                          <form action="{% url 'finalizar_entrega' solicitacao.id %}" method="POST"> {% csrf_token %}
+                            <label> Já recebeu a sua encomenda? </label>
+                            <input type="submit" class="btn btn-primary btn-block" value="Finalizar Entrega">
+                          </form>
+                        {% endif %}
+                      {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}

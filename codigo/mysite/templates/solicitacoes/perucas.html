@@ -3,98 +3,60 @@
 {% block content %}
 
 {% load static %}
+ <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/perucas.css' %}">
-</head>
+        <div class="row gx-lg-0 gy-4">
 
-  <body>
-    <div class="centered-div">
-        <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="registration-form">
-                <div class="titulo">
-                    <br> <h1> &zwnj; Banco de Perucas &zwnj; </h1> <br> <br> 
-                </div>
+          <div class="col-lg-12">
+            <div class="django-form">
+              <div class="section-header">
+                <h2>Banco de Perucas</h2>
+              </div>
 
-                <div class="perucas-container">
+                <section id="team" class="team">
+                  <div class="container" data-aos="fade-up">
+            
+                    <div class="row gy-4">
+
+                      {% for peruca in perucas_disponiveis %}
+
+                      <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                        <div class="member">
+                          <div class="text-start">
+                            <label for="peruca_{{ peruca.id }}">
+                                <img src="{{ peruca.foto.url }}" alt="Foto da Peruca" class="img-fluid">
+                                <h4> Tamanho: {{ peruca.tamanho }} <br> </h4>
+                                <h4> Tipo: {{ peruca.tipo }} <br> </h4>
+                                <h4> Cor: {{ peruca.cor }} <br> </h4> 
+                            </label>
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'editar_peruca' peruca.pk %}" class="btn btn-warning me-2">Editar</a>
+                                <a href="{% url 'excluir_peruca' peruca.pk %}" class="btn btn-danger">Excluir</a>
+                            </div>
+                          </div>  
+                        </div>
+                    </div>
+              
+                      {% endfor %}
+            
+                    </div>
+                    <br> <br>
                     <div class="row">
-                        {% for peruca in perucas_disponiveis %}
-                            <div class="col-md-12">
-                                <div class="peruca-item">
-                                    <div class="dentro_item">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <img src="{{ peruca.foto.url }}" alt="Foto da Peruca" class="peruca-img">
-                                            </div>
-                                            <div class="texto-vertical col-md-9">
-                                                <p>
-                                                    <strong> Tamanho: </strong> {{ peruca.tamanho }} <br>
-                                                    <strong> Tipo: </strong> {{ peruca.tipo }} <br>
-                                                    <strong> Cor: </strong> {{ peruca.cor }} <br>   
-                                                </p>
-                                                <div class="btn-group" role="group">
-                                                    <form method="post" action="{% url 'excluir_peruca' peruca.pk %}">
-                                                        {% csrf_token %}
-                                                        <button type="submit" class="btn btn-danger">Excluir</button>
-                                                    </form>
-                                                    <a href="{% url 'editar_peruca' peruca.pk %}" class="btn btn-primary mx-3">Editar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% empty %}
-                            <div class="col">
-                                <p>Nenhuma peruca cadastrada.</p>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                
-                <form method="post" enctype="multipart/form-data" action="{% url 'cadastrar_peruca' %}"> {% csrf_token %}
-                    <div>
-                        <br> <h2> &zwnj; Cadastrar novas perucas &zwnj; </h2> <br> <br> <br>
-                    </div>
-                    <div class="form-group">
-                        <label>Tamanho:</label>
-                        <select name="tamanho">
-                            <option value="curto">Peruca de tamanho curto</option>
-                            <option value="medio">Peruca de tamanho médio</option>
-                            <option value="longo">Peruca de tamanho longo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo:</label>
-                        <select name="tipo">
-                            <option value="liso">Peruca de cabelo liso</option>
-                            <option value="ondulado">Peruca de cabelo ondulado</option>
-                            <option value="cacheado">Peruca de cabelo cacheado</option>
-                            <option value="crespo">Peruca de cabelo crespo</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Cor:</label>
-                        <select name="cor">
-                            <option value="loiro">Peruca de cabelo loiro</option>
-                            <option value="ruivo">Peruca de cabelo ruivo</option>
-                            <option value="preto">Peruca de cabelo preto</option>
-                            <option value="castanho">Peruca de cabelo castanho</option>
-                            <option value="grisalho">Peruca de cabelo grisalho</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Foto da peruca:</label>
-                        <input type="file" name="foto" accept="image/*" required>
-                    </div>
-                    <br> <button type="submit" class="btn btn-primary btn-block">Cadastrar nova peruca</button>
-                  </form>
-            </div>
+                      <a href="{% url 'cadastrar_peruca' %}" type="button" class="button-cadastrar"> <strong> Cadastrar nova peruca </strong> </a>
+                  </div>
+                  
+                  </div>
+                </section><!-- End Our Team Section -->
+
+
+              </div>
+          </div><!-- End Contact Form -->
+
         </div>
-        </div>
-        </div>
-    </div>
-    </body>
-{% endblock %}
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    {% endblock %}
