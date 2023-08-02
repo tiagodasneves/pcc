@@ -3,40 +3,61 @@
 {% block content %}
 
 {% load static %}
+ <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
 
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/lista_solicitacoes.css' %}">
-</head>
+        <div class="row gx-lg-0 gy-4">
 
-<body>
-    <section clas="lista">
-        <div class="titulo">
-            <br> <br> <h1> &zwnj; Lista de Solicitações &zwnj; </h1> <br> <br> 
+          <div class="col-lg-12">
+            <div class="django-form">
+              <div class="section-header">
+                <h2>Lista de Solicitações</h2>
+              </div>
+
+              <div class="container mt-5">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="text-center bg-custom text-white">Nome</th>
+                      <th class="text-center bg-custom text-white">Status</th> 
+                      <th class="text-center bg-custom text-white">Mais detalhes</th>
+                      <th class="text-center bg-custom text-white">Deletar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for solicitacao in solicitacoes %}
+                      <tr>
+                        <td>{{ solicitacao.usuario.nome }} {{ solicitacao.usuario.sobrenome }}</td>
+                        <td>
+                            {% if solicitacao.status == 'analise' %}
+                            <p class="status-analise text-center"> <strong> Pedido {{ solicitacao.get_status_display }} </strong> </p>
+                            {% elif solicitacao.status == 'aprovado' %}
+                            <p class="status-aprovado text-center"> <strong> Pedido {{ solicitacao.get_status_display }} </strong> </p>
+                            {% elif solicitacao.status == 'rejeitado' %}
+                            <p class="status-rejeitado text-center"> <strong> Pedido {{ solicitacao.get_status_display }} </strong> </p>
+                            {% elif solicitacao.status == 'caminho' %}
+                            <p class="status-caminho text-center"> <strong> Pedido {{ solicitacao.get_status_display }} </strong> </p>
+                            {% elif solicitacao.status == 'entregue' %}
+                            <p class="status-entregue text-center"> <strong> Pedido {{ solicitacao.get_status_display }} </strong> </p>
+                            {% endif %}
+                        </td>
+                        <td class="text-center"><a href="{% url 'detalhes_solicitacao' solicitacao.id %}" class="btn btn-warning">Mais detalhes</a></td>
+                        <td class="text-center"><a href="{% url 'deletar_solicitacao' solicitacao.id %}" class="btn btn-danger">Deletar</a></td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              
+
+            </div>
+            </div>
+          </div><!-- End Contact Form -->
+
         </div>
-        
-        {% for solicitacao in solicitacoes %}
-        <div class="lista-usuarios">
-            <h4> Solicitação feita por {{ solicitacao.usuario.nome }} {{ solicitacao.usuario.sobrenome }} </h4>
-            {% if solicitacao.status == 'analise' %}
-            <p class="status-analise"> Status: {{ solicitacao.get_status_display }}</p>
-            {% elif solicitacao.status == 'aprovado' %}
-            <p class="status-aprovado"> Status: {{ solicitacao.get_status_display }}</p>
-            {% elif solicitacao.status == 'rejeitado' %}
-            <p class="status-rejeitado"> Status: {{ solicitacao.get_status_display }}</p>
-            {% elif solicitacao.status == 'caminho' %}
-            <p class="status-caminho"> Status: {{ solicitacao.get_status_display }}</p>
-            {% elif solicitacao.status == 'entregue' %}
-            <p class="status-entregue"> Status: {{ solicitacao.get_status_display }}</p>
-            {% endif %}
-            <div class="d-flex justify-content-start">
-                <a href="{% url 'detalhes_solicitacao' solicitacao.id %}" class="btn btn-primary me-2"> Mais detalhes </a>
-                <a href="{% url 'deletar_solicitacao' solicitacao.id %}" class="btn btn-danger">Deletar</a>
-            </div>  
-        </div>
-      {% empty %}
-        <p>Nenhuma solicitação encontrada.</p>
-      {% endfor %}
-    </section>
-</body>
-{% endblock %}
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    {% endblock %}

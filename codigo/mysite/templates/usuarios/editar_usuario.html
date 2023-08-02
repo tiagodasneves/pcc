@@ -12,7 +12,7 @@
           <div class="col-lg-12">
             <form method="POST" action="{% url 'editar_usuario' usuario.id %}" class="django-form"> {% csrf_token %}
               <div class="section-header">
-                <h2>Seu perfil</h2>
+                <h2> User {{usuario.nome}} {{usuario.sobrenome}}</h2>
               </div>
                 <h3>Dados pessoais</h3> <br>
               <div class="row">
@@ -49,7 +49,7 @@
                   <input type="text" class="form-control" name="cep" value="{{usuario.cep}}" required>
                 </div>
               </div>        
-              <br> <div class="text-center"><button type="submit">Editar Perfil</button></div>
+              <br> <div class="text-center"><button type="submit">Editar Usuário</button></div>
             </form>
           </div><!-- End Contact Form -->
 

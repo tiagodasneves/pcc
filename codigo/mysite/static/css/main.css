@@ -63,6 +63,47 @@
   margin: 10px;
 }
 
+.bg-custom {
+  background-color:  #008374  !important;;
+}
+
+
+.table-striped tbody tr:nth-child(2n) {
+  background-color: #048474; 
+  color: #ffffff; 
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border: 2px solid #ccc; /* Define a grossura das bordas */
+  padding: 8px; /* Adicione um espaçamento interno para melhorar o visual */
+}
+
+.status-analise {
+  color: orange; 
+}
+
+.status-aprovado {
+  color: blue; 
+}
+
+.status-rejeitado {
+  color: red; 
+}
+
+.status-caminho {
+  color: rgb(107, 41, 0); 
+}
+
+.status-entregue {
+  color: green; 
+}
+
 li {
   display: flex;
   align-items: center;

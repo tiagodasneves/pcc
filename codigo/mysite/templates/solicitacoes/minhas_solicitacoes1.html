@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/lista_solicitacoes.css' %}">
+</head>
+
+<body>
+    <section clas="lista">
+        <div class="titulo">
+            <br> <br> <h1> &zwnj; Minhas Solicitações &zwnj; </h1> <br> <br> 
+        </div>
+        
+        {% for solicitacao in solicitacoes %}
+        <div class="lista-usuarios">
+            <h4> Minha solicitação </h4>
+            {% if solicitacao.status == 'analise' %}
+            <p class="status-analise"> Status: {{ solicitacao.get_status_display }}</p>
+            {% elif solicitacao.status == 'aprovado' %}
+            <p class="status-aprovado"> Status: {{ solicitacao.get_status_display }}</p>
+            {% elif solicitacao.status == 'rejeitado' %}
+            <p class="status-rejeitado"> Status: {{ solicitacao.get_status_display }}</p>
+            {% elif solicitacao.status == 'caminho' %}
+            <p class="status-caminho"> Status: {{ solicitacao.get_status_display }}</p>
+            {% elif solicitacao.status == 'entregue' %}
+            <p class="status-entregue"> Status: {{ solicitacao.get_status_display }}</p>
+            {% endif %}
+            <div class="d-flex justify-content-start">
+                <a href="{% url 'detalhes_solicitacao' solicitacao.id %}" class="btn btn-primary me-2"> Mais detalhes </a>
+                <a href="{% url 'deletar_solicitacao' solicitacao.id %}" class="btn btn-danger">Deletar</a>
+            </div>  
+        </div>
+      {% empty %}
+        <p>Nenhuma solicitação encontrada.</p>
+      {% endfor %}
+    </section>
+</body>
+{% endblock %}
